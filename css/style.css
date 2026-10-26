@@ -327,7 +327,7 @@ button { font-family: inherit; color: inherit; }
 .gh-empty { font-size: 12px; color: var(--ink-3); padding: 2px 0; }
 
 /* ——— Chismografía Técnica ——— */
-#chisme { grid-column: 1 / -1; min-height: 158px; }
+#chisme { grid-column: 1 / -1; min-height: 178px; }
 .chisme-body { flex: 1; min-height: 0; display: flex; }
 .chisme-list {
   display: flex; gap: 10px; width: 100%;
@@ -355,19 +355,17 @@ button { font-family: inherit; color: inherit; }
 .chisme-empty { flex: 1; display: flex; align-items: center; justify-content: center; gap: 18px; min-height: 0; }
 .desert {
   position: relative; flex: 0 0 auto;
-  width: 190px; height: 70px;
-  border-radius: 10px; overflow: hidden;
-  background: linear-gradient(180deg, transparent 52%, rgba(201, 154, 74, .10) 53%, rgba(201, 154, 74, .18));
-  border: 1px solid var(--line);
+  width: 260px; height: 96px;
+  border-radius: 12px; overflow: hidden;
+  background: #1a1126;
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 10px 22px -16px rgba(0, 0, 0, .65);
 }
-.desert::after {
-  content: ""; position: absolute; left: 8px; right: 8px; bottom: 6px; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201, 154, 74, .5), transparent);
-}
+.desert-bg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .tumble {
-  position: absolute; bottom: 12px; left: 0;
-  width: 38px; height: 38px;
-  animation: tumbleMove 6s linear infinite;
+  position: absolute; bottom: 16px; left: 12px;
+  width: 56px; height: 56px;
+  animation: tumbleMove 7s linear infinite;
 }
 .tumble-hop { display: block; width: 100%; height: 100%; animation: tumbleHop .6s ease-in-out infinite alternate; }
 .tumble svg {
@@ -375,14 +373,14 @@ button { font-family: inherit; color: inherit; }
   image-rendering: pixelated;
   animation: tumbleSpin 1.2s steps(8, end) infinite;
 }
-@keyframes tumbleMove { from { transform: translateX(0); } to { transform: translateX(140px); } }
+@keyframes tumbleMove { from { transform: translateX(0); } to { transform: translateX(180px); } }
 @keyframes tumbleHop { from { transform: translateY(0); } to { transform: translateY(-5px); } }
 @keyframes tumbleSpin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) {
-  .tumble { animation: none; transform: translateX(60px); }
+  .tumble { animation: none; transform: translateX(90px); }
   .tumble-hop, .tumble svg { animation: none; }
 }
-[data-motion="off"] .tumble { animation: none !important; transform: translateX(60px); }
+[data-motion="off"] .tumble { animation: none !important; transform: translateX(90px); }
 [data-motion="off"] .tumble-hop, [data-motion="off"] .tumble svg { animation: none !important; }
 .chisme-empty p {
   margin: 0; max-width: 26ch;
@@ -470,6 +468,8 @@ button { font-family: inherit; color: inherit; }
   .welcome-role { font-size: 17px; }
   #ghActivity { max-height: 230px; }
   #chisme { min-height: 150px; }
+  .chisme-empty { flex-direction: column; gap: 10px; }
+  .desert { width: min(260px, 100%); }
   #dock {
     left: 8px; right: 8px; transform: none;
     justify-content: space-around; gap: 2px;

@@ -98,26 +98,48 @@
     dot: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>'
   };
 
+  var DESERT_SCENE =
+    '<svg class="desert-bg" viewBox="0 0 240 96" shape-rendering="crispEdges" aria-hidden="true">' +
+      '<rect width="240" height="14" fill="#8f5bd6"/>' +
+      '<rect y="14" width="240" height="10" fill="#b95fbf"/>' +
+      '<rect y="24" width="240" height="10" fill="#e26a9a"/>' +
+      '<rect y="34" width="240" height="10" fill="#f07e83"/>' +
+      '<rect y="44" width="240" height="8" fill="#f79b6c"/>' +
+      '<rect y="52" width="240" height="6" fill="#fbbd6b"/>' +
+      '<rect y="58" width="240" height="4" fill="#ffe08a"/>' +
+      '<g fill="#ffe28a"><rect x="142" y="36" width="16" height="2"/><rect x="138" y="38" width="24" height="4"/><rect x="136" y="42" width="28" height="6"/><rect x="134" y="48" width="32" height="2"/></g>' +
+      '<g fill="#fff3c4"><rect x="142" y="40" width="16" height="2"/><rect x="140" y="42" width="20" height="6"/><rect x="138" y="48" width="24" height="2"/></g>' +
+      '<polygon points="0,62 34,26 52,34 74,18 108,62" fill="#9c4036"/>' +
+      '<polygon points="52,34 74,18 108,62 74,62" fill="#7a2e2b"/>' +
+      '<polygon points="0,62 34,26 52,34 40,62" fill="#b5543c"/>' +
+      '<polygon points="150,62 164,46 186,46 200,62" fill="#8a352f"/>' +
+      '<polygon points="186,46 208,50 240,50 240,62 200,62" fill="#6f2a28"/>' +
+      '<rect y="60" width="240" height="36" fill="#e8933f"/>' +
+      '<rect y="60" width="240" height="6" fill="#f4b45c"/>' +
+      '<rect y="66" width="240" height="4" fill="#dd8636"/>' +
+      '<rect y="78" width="240" height="4" fill="#c9762f"/>' +
+      '<rect y="86" width="240" height="10" fill="#b76628"/>' +
+      '<path d="M0 72h26v2H0zM40 70h18v2H40zM96 74h30v2H96zM150 72h22v2h-22zM196 76h44v2h-44z" fill="#c9762f"/>' +
+      '<g fill="#17877f">' +
+        '<rect x="214" y="42" width="8" height="26"/>' +
+        '<rect x="206" y="50" width="8" height="4"/><rect x="206" y="54" width="4" height="6"/>' +
+        '<rect x="214" y="46" width="12" height="4"/><rect x="222" y="50" width="4" height="8"/>' +
+      '</g>' +
+      '<g fill="#22a89c">' +
+        '<rect x="214" y="42" width="4" height="26"/>' +
+        '<rect x="206" y="50" width="4" height="4"/>' +
+        '<rect x="222" y="46" width="4" height="4"/>' +
+      '</g>' +
+      '<g fill="#17877f"><rect x="34" y="72" width="4" height="12"/><rect x="30" y="77" width="4" height="5"/><rect x="38" y="75" width="4" height="7"/></g>' +
+      '<g fill="#6f2a28"><rect x="86" y="82" width="10" height="4"/><rect x="160" y="84" width="14" height="3"/><rect x="16" y="86" width="8" height="3"/></g>' +
+    '</svg>';
+
   var TUMBLEWEED =
-    '<svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">' +
-      '<g fill="#a8792f">' +
-        '<rect x="6" y="3" width="4" height="1"/>' +
-        '<rect x="4" y="4" width="2" height="1"/><rect x="10" y="4" width="2" height="1"/>' +
-        '<rect x="3" y="5" width="1" height="1"/><rect x="12" y="5" width="1" height="1"/>' +
-        '<rect x="2" y="6" width="1" height="5"/><rect x="13" y="6" width="1" height="5"/>' +
-        '<rect x="3" y="10" width="1" height="1"/><rect x="12" y="10" width="1" height="1"/>' +
-        '<rect x="4" y="11" width="2" height="1"/><rect x="10" y="11" width="2" height="1"/>' +
-        '<rect x="6" y="12" width="4" height="1"/>' +
-      '</g>' +
-      '<g fill="#c99a4a">' +
-        '<rect x="6" y="5" width="2" height="1"/><rect x="9" y="6" width="2" height="1"/>' +
-        '<rect x="4" y="7" width="3" height="1"/><rect x="9" y="8" width="3" height="1"/>' +
-        '<rect x="5" y="9" width="2" height="1"/><rect x="7" y="10" width="3" height="1"/>' +
-        '<rect x="8" y="4" width="1" height="1"/>' +
-      '</g>' +
-      '<g fill="#7d5620">' +
-        '<rect x="7" y="7" width="2" height="2"/><rect x="5" y="8" width="1" height="1"/>' +
-        '<rect x="10" y="9" width="1" height="1"/>' +
+    '<svg viewBox="0 0 24 24" shape-rendering="crispEdges" aria-hidden="true">' +
+      '<g fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+        '<path d="M4 13C6 6 14 4 18 9c3 4-1 10-6 10S4 15 6 11c2-4 7-5 10-2 3 3 0 7-4 7-3 0-4-3-2-5" stroke="#6b4218" stroke-width="1.2"/>' +
+        '<path d="M3 10c5 2 12 6 17 2M5 16c4-6 8-10 14-8M7 5c3 7 5 13 9 13M10 3c-1 6 2 12 8 14M4 8c6 1 12 0 16 7" stroke="#7d4e1c" stroke-width="1.1"/>' +
+        '<path d="M8 19c-1-4 1-8 4-10 2-2 5-2 6 0M11 4c3 1 6 4 6 8" stroke="#8f5c24" stroke-width="1"/>' +
       '</g>' +
     '</svg>';
 
@@ -220,7 +242,7 @@
   function tumbleEmpty() {
     var wrap = el("div", "chisme-empty");
     var desert = el("div", "desert");
-    desert.innerHTML = '<span class="tumble"><span class="tumble-hop">' + TUMBLEWEED + '</span></span>';
+    desert.innerHTML = DESERT_SCENE + '<span class="tumble"><span class="tumble-hop">' + TUMBLEWEED + '</span></span>';
     var p = el("p");
     p.textContent = Lang.t("chisme.empty");
     wrap.appendChild(desert);
