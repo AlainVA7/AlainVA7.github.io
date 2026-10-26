@@ -1,0 +1,70 @@
+name: Sync blog posts index
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "content/posts/**"
+      - ".github/workflows/sync-posts.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-posts
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Rebuild posts.json from content/posts
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, re, pathlib, datetime
+
+          posts = []
+          folder = pathlib.Path("content/posts")
+          for f in sorted(folder.glob("*.md")):
+              text = f.read_text(encoding="utf-8")
+              m = re.match(r"---\r?\n(.*?)\r?\n---", text, re.S)
+              meta = {}
+              if m:
+                  for line in m.group(1).splitlines():
+                      mm = re.match(r"(title_es|title_en|date|tags):\s*(.*)", line.strip())
+                      if mm:
+                          meta[mm.group(1)] = mm.group(2).strip()
+              tags = [t.strip() for t in meta.get("tags", "").split(",") if t.strip()]
+              posts.append({
+                  "id": f.stem,
+                  "file": str(f).replace("\\", "/"),
+                  "title_es": meta.get("title_es", f.stem),
+                  "title_en": meta.get("title_en", f.stem),
+                  "date": meta.get("date", ""),
+                  "tags": tags,
+              })
+
+          posts.sort(key=lambda p: p["date"], reverse=True)
+          now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+          out = {"updated": now, "posts": posts}
+          pathlib.Path("posts.json").write_text(
+              json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          print(f"Posts: {len(posts)}")
+          PY
+
+      - name: Commit if changed
+        run: |
+          if ! git diff --quiet -- posts.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41981409+github-actions[bot]@users.noreply.github.com"
+            git add posts.json
+            git commit -m "chore: sync posts index"
+            git push
+          else
+            echo "posts.json sin cambios"
+          fi

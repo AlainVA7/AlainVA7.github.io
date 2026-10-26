@@ -1,0 +1,71 @@
+name: Sync projects from GitHub
+
+on:
+  schedule:
+    - cron: "23 4 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/sync-projects.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-projects
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch repos and rebuild projects.json
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/sync
+          gh api --paginate "users/${{ github.repository_owner }}/repos?per_page=100&sort=updated&affiliation=owner" \
+            | jq -s 'add' > /tmp/sync/repos.json
+
+          NOW=$(date -u +%FT%TZ)
+          jq --arg updated "$NOW" --arg site "${{ github.event.repository.name }}" '
+            {
+              updated: $updated,
+              projects: [
+                .[]
+                | select(.fork == false)
+                | select(.name != $site)
+                | select((.name | ascii_downcase) != ((.owner.login | ascii_downcase) + ".github.io"))
+                | {
+                    name,
+                    description,
+                    language,
+                    stars: .stargazers_count,
+                    url: .html_url,
+                    homepage,
+                    updatedAt: .updated_at,
+                    topics,
+                    fork
+                  }
+              ]
+            }
+          ' /tmp/sync/repos.json > projects.json
+
+          echo "Proyectos: $(jq '.projects | length' projects.json)"
+
+      - name: Commit if changed
+        run: |
+          if ! git diff --quiet -- projects.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41981409+github-actions[bot]@users.noreply.github.com"
+            git add projects.json
+            git commit -m "chore: sync projects from GitHub"
+            git push
+          else
+            echo "projects.json sin cambios"
+          fi

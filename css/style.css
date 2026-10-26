@@ -1,0 +1,367 @@
+/* ═══════════════════════════════════════════
+   AlainOS — shell: tokens, temas, boot, chrome
+   ═══════════════════════════════════════════ */
+
+:root {
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Consolas, monospace;
+  --r-win: 16px;
+  --r-card: 14px;
+  --r-pill: 999px;
+  --spring: cubic-bezier(.32, .72, 0, 1);
+  --spring-soft: cubic-bezier(.4, 0, .2, 1);
+  --pop: cubic-bezier(.34, 1.4, .5, 1);
+  --topbar-h: 40px;
+  --dock-h: 64px;
+}
+
+/* ——— Tema oscuro (premium ejecutivo) ——— */
+[data-theme="dark"] {
+  --bg-0: #070a10;
+  --bg-1: #0b1018;
+  --ink: #e8eef6;
+  --ink-2: #a7b2c2;
+  --ink-3: #737f90;
+  --accent: #58a6ff;
+  --accent-ink: #0a1420;
+  --ok: #49c17a;
+  --err: #ff7b72;
+  --warn: #e3b341;
+  --line: rgba(255, 255, 255, .09);
+  --line-strong: rgba(255, 255, 255, .16);
+  --glass: rgba(16, 21, 31, .72);
+  --glass-soft: rgba(22, 28, 40, .58);
+  --surface: rgba(255, 255, 255, .045);
+  --surface-2: rgba(255, 255, 255, .075);
+  --surface-3: rgba(255, 255, 255, .12);
+  --shadow-win: 0 32px 70px -18px rgba(0, 0, 0, .7), 0 8px 24px -8px rgba(0, 0, 0, .5);
+  --shadow-card: 0 10px 30px -14px rgba(0, 0, 0, .6);
+  --shadow-card-hi: 0 24px 48px -16px rgba(0, 0, 0, .65), 0 0 0 1px rgba(255, 255, 255, .07);
+  --topbar-glass: rgba(10, 14, 22, .78);
+  --dock-glass: rgba(18, 23, 33, .66);
+  --sheen: rgba(255, 255, 255, .16);
+  --track: rgba(255, 255, 255, .1);
+}
+
+/* ——— Tema claro ——— */
+[data-theme="light"] {
+  --bg-0: #eef2f7;
+  --bg-1: #f7f9fc;
+  --ink: #17202e;
+  --ink-2: #4b5768;
+  --ink-3: #78879c;
+  --accent: #0b69d6;
+  --accent-ink: #ffffff;
+  --ok: #1a9d55;
+  --err: #d1453b;
+  --warn: #b58105;
+  --line: rgba(15, 30, 55, .1);
+  --line-strong: rgba(15, 30, 55, .18);
+  --glass: rgba(255, 255, 255, .74);
+  --glass-soft: rgba(255, 255, 255, .6);
+  --surface: rgba(15, 35, 70, .05);
+  --surface-2: rgba(15, 35, 70, .08);
+  --surface-3: rgba(15, 35, 70, .13);
+  --shadow-win: 0 30px 64px -22px rgba(20, 38, 74, .35), 0 8px 22px -10px rgba(20, 38, 74, .22);
+  --shadow-card: 0 8px 24px -14px rgba(20, 38, 74, .3);
+  --shadow-card-hi: 0 22px 44px -18px rgba(20, 38, 74, .4), 0 0 0 1px rgba(15, 30, 55, .06);
+  --topbar-glass: rgba(250, 252, 255, .8);
+  --dock-glass: rgba(255, 255, 255, .68);
+  --sheen: rgba(255, 255, 255, .75);
+  --track: rgba(15, 30, 55, .12);
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--bg-0);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+button { font-family: inherit; color: inherit; }
+::selection { background: rgba(88, 166, 255, .32); }
+
+/* Scrollbars sobrios */
+* { scrollbar-width: thin; scrollbar-color: var(--surface-3) transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 8px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* ═══════════════ BOOT ═══════════════ */
+#boot {
+  position: fixed; inset: 0; z-index: 1000;
+  display: grid; place-items: center;
+  background:
+    radial-gradient(900px 600px at 50% 30%, rgba(88, 166, 255, .12), transparent 65%),
+    var(--bg-0);
+  transition: opacity .55s var(--spring), visibility .55s;
+}
+#boot.done { opacity: 0; visibility: hidden; pointer-events: none; }
+.boot-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 24px; cursor: pointer; }
+.boot-logo {
+  filter: drop-shadow(0 0 24px rgba(88, 166, 255, .45));
+  animation: bootPulse 2.2s ease-in-out infinite;
+}
+@keyframes bootPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 14px rgba(88, 166, 255, .3)); }
+  50% { transform: scale(1.045); filter: drop-shadow(0 0 30px rgba(88, 166, 255, .55)); }
+}
+.boot-name {
+  font-size: 22px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink);
+}
+.boot-bar {
+  width: 220px; height: 3px; border-radius: 3px;
+  background: var(--surface-2); overflow: hidden;
+}
+#bootFill {
+  display: block; height: 100%; width: 0%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent), #8ec5ff);
+  transition: width .18s linear;
+}
+.boot-hint { font-size: 12px; color: var(--ink-3); letter-spacing: .04em; }
+
+/* Escritorio entra tras boot */
+#desktop {
+  position: fixed; inset: 0;
+  opacity: 0; transform: scale(1.015);
+  transition: opacity .6s var(--spring), transform .6s var(--spring);
+}
+#desktop.on { opacity: 1; transform: scale(1); }
+
+/* ═══════════════ WALLPAPERS ═══════════════ */
+#desktop::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: var(--bg-0);
+}
+#desktop::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  opacity: 1; transition: opacity .6s ease;
+}
+[data-wall="aurora"] #desktop::after {
+  background:
+    radial-gradient(1100px 750px at 14% 18%, rgba(88, 166, 255, .17), transparent 60%),
+    radial-gradient(950px 700px at 86% 78%, rgba(155, 113, 247, .13), transparent 55%),
+    radial-gradient(700px 500px at 60% 8%, rgba(73, 193, 122, .07), transparent 60%);
+}
+[data-wall="graphite"] #desktop::after {
+  background:
+    radial-gradient(1000px 700px at 80% 20%, rgba(255, 255, 255, .06), transparent 60%),
+    radial-gradient(800px 600px at 20% 85%, rgba(255, 255, 255, .045), transparent 55%),
+    linear-gradient(160deg, rgba(255, 255, 255, .02), transparent 40%);
+}
+[data-wall="ocean"] #desktop::after {
+  background:
+    radial-gradient(1000px 750px at 75% 25%, rgba(45, 164, 219, .18), transparent 60%),
+    radial-gradient(850px 600px at 15% 80%, rgba(34, 120, 214, .15), transparent 55%),
+    radial-gradient(600px 450px at 45% 55%, rgba(80, 220, 190, .07), transparent 60%);
+}
+[data-wall="plain"] #desktop::after { background: transparent; }
+
+/* Ajuste de wallpapers para tema claro (más sutiles) */
+[data-theme="light"][data-wall="aurora"] #desktop::after {
+  background:
+    radial-gradient(1100px 750px at 14% 18%, rgba(11, 105, 214, .1), transparent 60%),
+    radial-gradient(950px 700px at 86% 78%, rgba(146, 96, 232, .09), transparent 55%),
+    radial-gradient(700px 500px at 60% 8%, rgba(26, 157, 85, .07), transparent 60%);
+}
+[data-theme="light"][data-wall="ocean"] #desktop::after {
+  background:
+    radial-gradient(1000px 750px at 75% 25%, rgba(45, 164, 219, .14), transparent 60%),
+    radial-gradient(850px 600px at 15% 80%, rgba(34, 120, 214, .1), transparent 55%);
+}
+[data-theme="light"][data-wall="graphite"] #desktop::after {
+  background:
+    radial-gradient(1000px 700px at 80% 20%, rgba(15, 30, 55, .05), transparent 60%),
+    radial-gradient(800px 600px at 20% 85%, rgba(15, 30, 55, .04), transparent 55%);
+}
+
+/* ═══════════════ BARRA SUPERIOR ═══════════════ */
+#topbar {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 500;
+  height: var(--topbar-h);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 14px;
+  background: var(--topbar-glass);
+  -webkit-backdrop-filter: blur(22px) saturate(1.5);
+  backdrop-filter: blur(22px) saturate(1.5);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .04) inset;
+  font-size: 12.5px;
+}
+.tb-left { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.tb-brand {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-weight: 600; letter-spacing: .05em; color: var(--ink);
+}
+.tb-brand svg { color: var(--accent); }
+.tb-app {
+  color: var(--ink-3); font-weight: 500;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  transition: color .25s;
+}
+.tb-app:not(:empty)::before { content: "·"; margin-right: 10px; color: var(--ink-3); }
+.tb-right { display: flex; align-items: center; gap: 12px; }
+.tb-clock { font-variant-numeric: tabular-nums; color: var(--ink-2); letter-spacing: .02em; white-space: nowrap; }
+
+/* Conmutador ES/EN */
+.lang-switch {
+  display: inline-flex; padding: 2px; gap: 2px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-pill);
+}
+.lang-btn {
+  border: 0; background: transparent; cursor: pointer;
+  font-size: 11px; font-weight: 600; letter-spacing: .06em;
+  color: var(--ink-3); padding: 3px 9px; border-radius: var(--r-pill);
+  transition: color .25s, background .25s, box-shadow .25s;
+}
+.lang-btn:hover { color: var(--ink); }
+.lang-btn.active {
+  background: var(--surface-3); color: var(--ink);
+  box-shadow: 0 1px 6px -2px rgba(0, 0, 0, .4);
+}
+
+/* ═══════════════ ICONOS DE ESCRITORIO ═══════════════ */
+#deskIcons {
+  position: absolute; top: calc(var(--topbar-h) + 18px); left: 16px; z-index: 2;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.dicon {
+  width: 88px; padding: 10px 6px 8px; border: 1px solid transparent; border-radius: 14px;
+  background: transparent; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  transition: background .25s var(--spring), border-color .25s, transform .3s var(--pop);
+}
+.dicon:hover { background: var(--surface); border-color: var(--line); }
+.dicon:active { transform: scale(.94); }
+.dicon-img {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: grid; place-items: center;
+  color: var(--ink);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid var(--line-strong);
+  box-shadow:
+    0 8px 20px -8px rgba(0, 0, 0, .5),
+    inset 0 1px 0 rgba(255, 255, 255, .12),
+    inset 0 -10px 18px -14px rgba(0, 0, 0, .55);
+}
+.dicon-img svg { width: 26px; height: 26px; }
+.dicon-label {
+  font-size: 11.5px; font-weight: 500; color: var(--ink);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .55);
+  max-width: 84px; text-align: center; line-height: 1.25;
+}
+[data-theme="light"] .dicon-label { text-shadow: 0 1px 2px rgba(255, 255, 255, .8); }
+
+/* ═══════════════ DOCK ═══════════════ */
+#dock {
+  position: absolute; left: 50%; bottom: 14px; z-index: 500;
+  transform: translateX(-50%);
+  display: flex; align-items: flex-end; gap: 6px;
+  padding: 8px 12px;
+  background: var(--dock-glass);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  backdrop-filter: blur(28px) saturate(1.6);
+  border: 1px solid var(--line-strong);
+  border-radius: 22px;
+  box-shadow:
+    0 24px 50px -18px rgba(0, 0, 0, .6),
+    inset 0 1px 0 rgba(255, 255, 255, .12),
+    inset 0 -14px 24px -18px rgba(0, 0, 0, .5);
+}
+[data-theme="light"] #dock {
+  box-shadow:
+    0 20px 44px -18px rgba(20, 38, 74, .35),
+    inset 0 1px 0 rgba(255, 255, 255, .9),
+    inset 0 -12px 22px -18px rgba(20, 38, 74, .25);
+}
+.dock-btn {
+  position: relative;
+  width: 46px; height: 46px; padding: 0; border: 0; border-radius: 13px;
+  background: transparent; cursor: pointer;
+  display: grid; place-items: center;
+  transition: transform .32s var(--pop);
+}
+.dock-btn:hover { transform: translateY(-7px) scale(1.12); }
+.dock-btn:active { transform: translateY(-3px) scale(1.03); }
+.dock-icon {
+  width: 40px; height: 40px; border-radius: 11px;
+  display: grid; place-items: center;
+  color: var(--ink);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+  transition: background .25s, color .25s;
+}
+.dock-btn:hover .dock-icon { background: var(--surface-3); color: var(--accent); }
+.dock-icon svg { width: 21px; height: 21px; }
+.dock-dot {
+  position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%) scale(0);
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--accent);
+  transition: transform .3s var(--pop);
+}
+.dock-btn.running .dock-dot { transform: translateX(-50%) scale(1); }
+.dock-sep { width: 1px; height: 34px; margin: 0 3px 4px; background: var(--line-strong); }
+.dock-tip {
+  position: absolute; bottom: calc(100% + 12px); left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  padding: 4px 10px; border-radius: 8px;
+  background: var(--glass); border: 1px solid var(--line-strong);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  font-size: 11.5px; font-weight: 500; white-space: nowrap;
+  color: var(--ink); opacity: 0; pointer-events: none;
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, .5);
+  transition: opacity .2s ease, transform .3s var(--spring);
+}
+.dock-btn:hover .dock-tip { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ═══════════════ LAYER ═══════════════ */
+#winLayer { position: absolute; inset: var(--topbar-h) 0 0 0; z-index: 10; pointer-events: none; }
+#winLayer .window { pointer-events: auto; }
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media (max-width: 768px) {
+  #deskIcons { flex-direction: row; flex-wrap: wrap; left: 10px; right: 10px; top: calc(var(--topbar-h) + 10px); gap: 2px; }
+  .dicon { width: 76px; }
+  #dock {
+    left: 8px; right: 8px; transform: none;
+    justify-content: space-around; gap: 2px;
+    padding: 8px 6px; border-radius: 18px;
+    max-width: calc(100vw - 16px); overflow-x: auto;
+  }
+  .dock-btn { width: 40px; height: 40px; }
+  .dock-icon { width: 36px; height: 36px; }
+  .dock-tip { display: none; }
+  .tb-app { display: none; }
+  .tb-clock { font-size: 11.5px; }
+}
+@media (max-width: 420px) {
+  .tb-brand { font-size: 12px; }
+  .lang-btn { padding: 3px 7px; }
+}
+
+/* ═══════════════ MOTION OFF ═══════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+[data-motion="off"] *, [data-motion="off"] *::before, [data-motion="off"] *::after {
+  animation-duration: .01ms !important;
+  animation-delay: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: .01ms !important;
+}

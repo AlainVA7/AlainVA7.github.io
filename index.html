@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-wall="aurora">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alain — Telecom &amp; IT · AI</title>
+  <meta name="description" content="Portfolio interactivo de Alain (AlainVA7) — Telecom &amp; IT Technician, estudiante de IA. Proyectos, notas y contacto.">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1117'/%3E%3Cpath d='M32 12 L48 52 H40 L37 43 H27 L24 52 H16 Z M32 26 L29 36 H35 Z' fill='%2358A6FF'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/windows.css">
+  <link rel="stylesheet" href="css/apps.css">
+  <script>
+    // Aplica preferencias antes del primer pintado (sin flash)
+    (function () {
+      try {
+        var qs = new URLSearchParams(location.search);
+        var t = qs.get("theme") || localStorage.getItem("alain.theme") || "dark";
+        var w = qs.get("wall") || localStorage.getItem("alain.wall") || "aurora";
+        var l = qs.get("lang") || localStorage.getItem("alain.lang") || "";
+        if (qs.get("theme")) localStorage.setItem("alain.theme", t);
+        if (qs.get("wall")) localStorage.setItem("alain.wall", w);
+        if (l) localStorage.setItem("alain.lang", l);
+        document.documentElement.dataset.theme = t;
+        document.documentElement.dataset.wall = w;
+        if (l) document.documentElement.lang = l;
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ══════════════ BOOT ══════════════ -->
+  <div id="boot" role="status" aria-live="polite">
+    <div class="boot-inner">
+      <svg class="boot-logo" viewBox="0 0 64 64" width="72" height="72" aria-hidden="true">
+        <rect width="64" height="64" rx="16" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
+        <path d="M32 12 L48 52 H40 L37 43 H27 L24 52 H16 Z M32 26 L29 36 H35 Z" fill="#58A6FF"/>
+      </svg>
+      <div class="boot-name">AlainOS</div>
+      <div class="boot-bar"><span id="bootFill"></span></div>
+      <div class="boot-hint" data-i18n="boot.hint">Pulsar para saltar</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ ESCRITORIO ══════════════ -->
+  <div id="desktop" aria-hidden="false">
+
+    <!-- Barra superior -->
+    <header id="topbar">
+      <div class="tb-left">
+        <span class="tb-brand" aria-label="AlainOS">
+          <svg viewBox="0 0 64 64" width="16" height="16" aria-hidden="true"><path d="M32 12 L48 52 H40 L37 43 H27 L24 52 H16 Z M32 26 L29 36 H35 Z" fill="currentColor"/></svg>
+          AlainOS
+        </span>
+        <span class="tb-app" id="tbApp"></span>
+      </div>
+      <div class="tb-right">
+        <div class="lang-switch" role="group" aria-label="Idioma / Language">
+          <button class="lang-btn" data-lang="es" type="button">ES</button>
+          <button class="lang-btn" data-lang="en" type="button">EN</button>
+        </div>
+        <time id="clock" class="tb-clock"></time>
+      </div>
+    </header>
+
+    <!-- Iconos de escritorio -->
+    <nav id="deskIcons" data-i18n-aria="desk.icons" aria-label="Iconos">
+      <button class="dicon" data-open="about" type="button">
+        <span class="dicon-img"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.2" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4.5 20c1.4-3.6 4.2-5.4 7.5-5.4s6.1 1.8 7.5 5.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+        <span class="dicon-label" data-i18n="app.about">Sobre mí</span>
+      </button>
+      <button class="dicon" data-open="projects" type="button">
+        <span class="dicon-img"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="4.5" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3.5" y="14" width="7" height="5.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="14" width="7" height="5.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/></svg></span>
+        <span class="dicon-label" data-i18n="app.projects">Proyectos</span>
+      </button>
+      <button class="dicon" data-open="terminal" type="button">
+        <span class="dicon-img"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M7.5 10l3 2.2-3 2.2M12.5 14.5H16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="dicon-label" data-i18n="app.terminal">Terminal</span>
+      </button>
+      <button class="dicon" data-open="blog" type="button">
+        <span class="dicon-img"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h9.5L19 7v13a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1-1.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.5 11h7M8.5 15h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+        <span class="dicon-label" data-i18n="app.blog">Notas</span>
+      </button>
+    </nav>
+
+    <!-- Capa de ventanas -->
+    <div id="winLayer"></div>
+
+    <!-- Dock -->
+    <nav id="dock" data-i18n-aria="dock.aria" aria-label="Dock">
+      <button class="dock-btn" data-open="about" type="button" data-i18n-title="app.about" aria-label="Sobre mí">
+        <span class="dock-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.2" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4.5 20c1.4-3.6 4.2-5.4 7.5-5.4s6.1 1.8 7.5 5.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+        <span class="dock-dot" aria-hidden="true"></span>
+        <span class="dock-tip" data-i18n="app.about">Sobre mí</span>
+      </button>
+      <button class="dock-btn" data-open="projects" type="button" data-i18n-title="app.projects" aria-label="Proyectos">
+        <span class="dock-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="4.5" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3.5" y="14" width="7" height="5.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="14" width="7" height="5.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/></svg></span>
+        <span class="dock-dot" aria-hidden="true"></span>
+        <span class="dock-tip" data-i18n="app.projects">Proyectos</span>
+      </button>
+      <button class="dock-btn" data-open="skills" type="button" data-i18n-title="app.skills" aria-label="Skills">
+        <span class="dock-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V13M10 20V8M16 20v-9M21.5 20V4.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" fill="none"/></svg></span>
+        <span class="dock-dot" aria-hidden="true"></span>
+        <span class="dock-tip" data-i18n="app.skills">Skills</span>
+      </button>
+      <button class="dock-btn" data-open="terminal" type="button" data-i18n-title="app.terminal" aria-label="Terminal">
+        <span class="dock-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M7.5 10l3 2.2-3 2.2M12.5 14.5H16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="dock-dot" aria-hidden="true"></span>
+        <span class="dock-tip" data-i18n="app.terminal">Terminal</span>
+      </button>
+      <span class="dock-sep" aria-hidden="true"></span>
+      <button class="dock-btn" data-open="blog" type="button" data-i18n-title="app.blog" aria-label="Notas">
+        <span class="dock-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h9.5L19 7v13a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1-1.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.5 11h7M8.5 15h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+        <span class="dock-dot" aria-hidden="true"></span>
+        <span class="dock-tip" data-i18n="app.blog">Notas</span>
+      </button>
+      <button class="dock-btn" data-open="contact" type="button" data-i18n-title="app.contact" aria-label="Contacto">
+        <span class="dock-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4.5 8l7.5 5.2L19.5 8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="dock-dot" aria-hidden="true"></span>
+        <span class="dock-tip" data-i18n="app.contact">Contacto</span>
+      </button>
+      <button class="dock-btn" data-open="settings" type="button" data-i18n-title="app.settings" aria-label="Ajustes">
+        <span class="dock-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 3.2v2.4M12 18.4v2.4M3.2 12h2.4M18.4 12h2.4M5.8 5.8l1.7 1.7M16.5 16.5l1.7 1.7M18.2 5.8l-1.7 1.7M7.5 16.5l-1.7 1.7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+        <span class="dock-dot" aria-hidden="true"></span>
+        <span class="dock-tip" data-i18n="app.settings">Ajustes</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- ══════════════ TEMPLATES DE APPS ══════════════ -->
+
+  <template id="tpl-about">
+    <div class="app about-app stagger">
+      <div class="about-head">
+        <img class="about-avatar" src="https://github.com/AlainVA7.png" width="96" height="96" alt="Alain">
+        <div>
+          <h2 class="about-name">Alain</h2>
+          <p class="about-role" data-i18n="about.role">Técnico Superior en Telecomunicaciones e IT · Estudiante de IA</p>
+          <p class="about-loc"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span data-i18n="about.loc">País Vasco, España</span></p>
+        </div>
+      </div>
+      <p class="about-bio" data-i18n="about.bio">Técnico Superior en Telecomunicaciones y Sistemas Informáticos, estudiando actualmente la especialización de Inteligencia Artificial. Me apasiona el mundo de la informática y sigo aprendiendo cada día.</p>
+      <div class="about-row">
+        <span class="chip" data-i18n="about.edu1">Grado Superior · Telecomunicaciones</span>
+        <span class="chip" data-i18n="about.edu2">Especialización · Inteligencia Artificial</span>
+        <span class="chip chip-soft" data-i18n="about.curious">Autodidacta</span>
+      </div>
+      <div class="about-block">
+        <h3 class="sec-h" data-i18n="about.learning">Aprendiendo ahora</h3>
+        <div class="about-row">
+          <span class="chip chip-blue">Artificial Intelligence</span>
+          <span class="chip chip-blue">Docker</span>
+          <span class="chip chip-blue">Linux</span>
+        </div>
+      </div>
+      <div class="about-block">
+        <h3 class="sec-h" data-i18n="about.interests">Intereses</h3>
+        <div class="about-row">
+          <span class="chip chip-soft" data-i18n="about.i1">Redes &amp; Telecom</span>
+          <span class="chip chip-soft" data-i18n="about.i2">Virtualización</span>
+          <span class="chip chip-soft" data-i18n="about.i3">Automatización</span>
+          <span class="chip chip-soft" data-i18n="about.i4">Ciberseguridad</span>
+        </div>
+      </div>
+      <div class="about-actions">
+        <button class="btn btn-primary" data-open="projects" type="button" data-i18n="about.cta">Ver proyectos</button>
+        <button class="btn btn-ghost" data-open="contact" type="button" data-i18n="app.contact">Contacto</button>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-projects">
+    <div class="app projects-app">
+      <div class="proj-toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input id="projSearch" type="search" data-i18n-ph="proj.search" placeholder="Buscar proyecto…" autocomplete="off">
+        </div>
+        <div id="projFilters" class="filters" role="tablist"></div>
+      </div>
+      <div id="projMeta" class="proj-meta"></div>
+      <div id="projGrid" class="proj-grid stagger" aria-live="polite"></div>
+    </div>
+  </template>
+
+  <template id="tpl-skills">
+    <div class="app skills-app">
+      <p class="skills-note" data-i18n="skills.note">Niveles orientativos y en progreso — sigo aprendiendo.</p>
+      <div id="skillList" class="skill-list stagger"></div>
+      <div class="skills-foot">
+        <span class="chip" data-i18n="skills.chip1">Linux</span>
+        <span class="chip" data-i18n="skills.chip2">Docker</span>
+        <span class="chip" data-i18n="skills.chip3">Proxmox</span>
+        <span class="chip" data-i18n="skills.chip4">IA</span>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-terminal">
+    <div class="app terminal-app">
+      <div id="termOut" class="term-out" role="log" aria-live="polite"></div>
+      <form id="termForm" class="term-input-row" autocomplete="off">
+        <span class="term-prompt" id="termPrompt">visitor@alainos:~$</span>
+        <input id="termInput" type="text" data-i18n-ph="term.ph" placeholder="escribe help…" spellcheck="false" aria-label="Entrada de terminal">
+      </form>
+    </div>
+  </template>
+
+  <template id="tpl-blog">
+    <div class="app blog-app">
+      <div id="blogList" class="blog-list stagger" aria-live="polite"></div>
+      <article id="blogPost" class="blog-post" hidden></article>
+    </div>
+  </template>
+
+  <template id="tpl-contact">
+    <div class="app contact-app stagger">
+      <p class="contact-lead" data-i18n="contact.lead">¿Tienes una idea, una pregunta o un proyecto? Hablemos.</p>
+      <div class="contact-cards">
+        <a class="ccard" href="https://mail.google.com/mail/?view=cm&fs=1&to=alainvallecillos@gmail.com" target="_blank" rel="noopener">
+          <span class="ccard-ico ccard-mail" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="5.5" width="18" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4.5 8l7.5 5.2L19.5 8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="ccard-body">
+            <span class="ccard-label" data-i18n="contact.email">Gmail</span>
+            <span class="ccard-value">alainvallecillos@gmail.com</span>
+          </span>
+          <span class="ccard-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="ccard" href="https://github.com/AlainVA7" target="_blank" rel="noopener">
+          <span class="ccard-ico ccard-gh" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 3a9 9 0 0 0-2.8 17.5c.45.08.6-.2.6-.44v-1.5c-2.5.55-3-1.2-3-1.2-.4-1.05-1-1.33-1-1.33-.82-.56.06-.55.06-.55.9.06 1.4.94 1.4.94.8 1.4 2.1 1 2.6.76.08-.6.32-1 .58-1.23-2-.23-4.1-1-4.1-4.45 0-.98.34-1.79.9-2.42-.09-.22-.39-1.12.09-2.33 0 0 .74-.24 2.4.92a8.3 8.3 0 0 1 4.4 0c1.65-1.16 2.4-.92 2.4-.92.48 1.2.18 2.1.09 2.34.56.63.9 1.44.9 2.41 0 3.47-2.11 4.22-4.12 4.44.33.28.61.83.61 1.67v2.47c0 .24.16.53.62.44A9 9 0 0 0 12 3z" fill="currentColor"/></svg>
+          </span>
+          <span class="ccard-body">
+            <span class="ccard-label">GitHub</span>
+            <span class="ccard-value">@AlainVA7</span>
+          </span>
+          <span class="ccard-arrow" aria-hidden="true">→</span>
+        </a>
+        <button class="ccard" id="copyMail" type="button">
+          <span class="ccard-ico ccard-copy" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20"><rect x="8" y="8" width="12" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M5 15.5V6.5A2.5 2.5 0 0 1 7.5 4H16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </span>
+          <span class="ccard-body">
+            <span class="ccard-label" data-i18n="contact.copy">Copiar correo</span>
+            <span class="ccard-value" id="copyMailLabel">alainvallecillos@gmail.com</span>
+          </span>
+          <span class="ccard-arrow" aria-hidden="true">⧉</span>
+        </button>
+      </div>
+      <p class="contact-note" data-i18n="contact.note">Respondo normalmente en menos de 48 h.</p>
+    </div>
+  </template>
+
+  <template id="tpl-settings">
+    <div class="app settings-app">
+      <section class="set-group stagger">
+        <h3 class="sec-h" data-i18n="set.theme">Apariencia</h3>
+        <div class="set-row">
+          <span data-i18n="set.mode">Tema</span>
+          <div class="seg" id="segTheme">
+            <button type="button" data-val="dark" data-i18n="set.dark">Oscuro</button>
+            <button type="button" data-val="light" data-i18n="set.light">Claro</button>
+          </div>
+        </div>
+        <div class="set-row">
+          <span data-i18n="set.wall">Fondo</span>
+          <div class="walls" id="wallPick">
+            <button type="button" class="wall wall-aurora" data-val="aurora" aria-label="Aurora"></button>
+            <button type="button" class="wall wall-graphite" data-val="graphite" aria-label="Graphite"></button>
+            <button type="button" class="wall wall-ocean" data-val="ocean" aria-label="Ocean"></button>
+            <button type="button" class="wall wall-plain" data-val="plain" aria-label="Plain"></button>
+          </div>
+        </div>
+      </section>
+      <section class="set-group stagger">
+        <h3 class="sec-h" data-i18n="set.lang">Idioma</h3>
+        <div class="set-row">
+          <span data-i18n="set.langLabel">Idioma de la interfaz</span>
+          <div class="seg" id="segLang">
+            <button type="button" data-val="es">Español</button>
+            <button type="button" data-val="en">English</button>
+          </div>
+        </div>
+      </section>
+      <section class="set-group stagger">
+        <h3 class="sec-h" data-i18n="set.sys">Sistema</h3>
+        <div class="set-row">
+          <span data-i18n="set.motion">Animaciones</span>
+          <label class="switch"><input type="checkbox" id="setMotion" checked><span class="switch-track"></span></label>
+        </div>
+        <div class="set-row">
+          <span data-i18n="set.boot">Pantalla de arranque</span>
+          <label class="switch"><input type="checkbox" id="setBoot" checked><span class="switch-track"></span></label>
+        </div>
+        <div class="set-row set-row-fine">
+          <span class="fine-text" data-i18n="set.about">AlainOS 1.0 — portfolio personal. Hecho con HTML, CSS y JavaScript puro.</span>
+        </div>
+      </section>
+    </div>
+  </template>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/wm.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/blog.js"></script>
+  <script src="js/apps.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
