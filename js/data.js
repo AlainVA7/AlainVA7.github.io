@@ -20,12 +20,11 @@ var USER = {
 
 /* Niveles: 0–100 (orientativos, edita cuando quieras) */
 var SKILLS = [
-  { id: "networking", level: 70, name: { es: "Redes & Telecomunicaciones", en: "Networks & Telecommunications" } },
-  { id: "linux",      level: 55, name: { es: "Linux", en: "Linux" } },
+  { id: "networking", level: 60, name: { es: "Redes & Telecomunicaciones", en: "Networks & Telecommunications" } },
+  { id: "linux",      level: 45, name: { es: "Linux", en: "Linux" } },
   { id: "docker",     level: 50, name: { es: "Docker", en: "Docker" } },
-  { id: "proxmox",    level: 45, name: { es: "Proxmox / Virtualización", en: "Proxmox / Virtualization" } },
+  { id: "proxmox",    level: 55, name: { es: "Proxmox / Virtualización", en: "Proxmox / Virtualization" } },
   { id: "git",        level: 55, name: { es: "Git & GitHub", en: "Git & GitHub" } },
-  { id: "python",     level: 45, name: { es: "Python", en: "Python" } },
   { id: "ai",         level: 40, name: { es: "Inteligencia Artificial", en: "Artificial Intelligence" } },
   { id: "grafana",    level: 35, name: { es: "Grafana / Monitorización", en: "Grafana / Monitoring" } }
 ];

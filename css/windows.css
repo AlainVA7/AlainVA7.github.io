@@ -59,6 +59,11 @@
   to { opacity: 0; transform: translate(-50%, -47%) scale(.95); filter: blur(6px); }
 }
 
+/* ——— CV: ocupa todo el alto disponible ——— */
+.panel[data-app="cv"] {
+  height: min(var(--ph, 880px), calc(100vh - var(--topbar-h) - var(--dock-h) - 48px));
+}
+
 /* ——— Barra del panel ——— */
 .panel-bar {
   position: relative; z-index: 4;
@@ -145,6 +150,7 @@
     transform: none;
     border-radius: 14px;
   }
+  .panel[data-app="cv"] { height: auto; }
   .panel.opening { animation: panelInM .34s var(--spring) both; }
   .panel.closing { animation: panelOutM .22s var(--spring-soft) both; }
   @keyframes panelInM {

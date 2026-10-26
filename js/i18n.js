@@ -8,7 +8,6 @@ var I18N = {
     /* boot */
     "boot.hint": "Pulsar para saltar",
     /* chrome */
-    "desk.icons": "Iconos de escritorio",
     "dock.aria": "Dock de aplicaciones",
     /* apps */
     "app.about": "Sobre mí",
@@ -23,16 +22,16 @@ var I18N = {
     "about.bio": "Técnico Superior en Telecomunicaciones y Sistemas Informáticos, estudiando actualmente la especialización de Inteligencia Artificial. Me apasiona el mundo de la informática y sigo aprendiendo cada día.",
     "about.edu1": "Grado Superior · Telecomunicaciones",
     "about.edu2": "Especialización · Inteligencia Artificial",
-    "about.curious": "Autodidacta",
     "about.learning": "Aprendiendo ahora",
     "about.interests": "Intereses",
     "about.i1": "Redes & Telecom",
     "about.i2": "Virtualización",
     "about.i3": "Automatización",
-    "about.i4": "Ciberseguridad",
     "about.cta": "Ver proyectos",
     "about.cv": "Ver CV",
     "about.cvDl": "Descargar",
+    "welcome.hi": "Hola, soy Alain",
+    "welcome.line": "Redes, sistemas e IA: construyo, cacharreo y sigo aprendiendo.",
     /* proyectos */
     "proj.search": "Buscar proyecto…",
     "proj.all": "Todos",
@@ -73,15 +72,13 @@ var I18N = {
     "set.langLabel": "Idioma de la interfaz",
     "set.sys": "Sistema",
     "set.motion": "Animaciones",
-    "set.boot": "Pantalla de arranque",
-    "set.about": "Deskroom 1.0 — portfolio personal. Hecho con HTML, CSS y JavaScript puro."
+    "set.boot": "Pantalla de arranque"
   },
 
   en: {
     /* boot */
     "boot.hint": "Click to skip",
     /* chrome */
-    "desk.icons": "Desktop icons",
     "dock.aria": "Application dock",
     /* apps */
     "app.about": "About",
@@ -96,16 +93,16 @@ var I18N = {
     "about.bio": "Higher Technician in Telecommunications and Computer Systems, currently studying the Artificial Intelligence specialization. I'm a computer enthusiast — I keep learning more about it every day.",
     "about.edu1": "Higher Diploma · Telecommunications",
     "about.edu2": "Specialization · Artificial Intelligence",
-    "about.curious": "Self-taught",
     "about.learning": "Learning now",
     "about.interests": "Interests",
     "about.i1": "Networks & Telecom",
     "about.i2": "Virtualization",
     "about.i3": "Automation",
-    "about.i4": "Cybersecurity",
     "about.cta": "View projects",
     "about.cv": "View CV",
     "about.cvDl": "Download",
+    "welcome.hi": "Hi, I'm Alain",
+    "welcome.line": "Networks, systems and AI: I build, tinker and keep learning.",
     /* projects */
     "proj.search": "Search projects…",
     "proj.all": "All",
@@ -146,8 +143,7 @@ var I18N = {
     "set.langLabel": "Interface language",
     "set.sys": "System",
     "set.motion": "Animations",
-    "set.boot": "Boot screen",
-    "set.about": "Deskroom 1.0 — personal portfolio. Built with plain HTML, CSS and JavaScript."
+    "set.boot": "Boot screen"
   }
 };
 

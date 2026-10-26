@@ -25,7 +25,7 @@ var WM = (function () {
     about:    { w: 620, h: 560 },
     projects: { w: 860, h: 640 },
     skills:   { w: 560, h: 560 },
-    cv:       { w: 780, h: 720 },
+    cv:       { w: 1040, h: 880 },
     contact:  { w: 560, h: 470 },
     settings: { w: 560, h: 540 }
   };
