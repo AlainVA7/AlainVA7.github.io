@@ -223,14 +223,24 @@ button { font-family: inherit; color: inherit; }
   box-shadow: 0 1px 6px -2px rgba(0, 0, 0, .4);
 }
 
-/* ═══════════════ TARJETA DE BIENVENIDA ═══════════════ */
-#welcome {
-  position: absolute; top: 45%; left: 50%;
-  transform: translate(-50%, -50%);
+/* ═══════════════ HUD DEL ESCRITORIO ═══════════════ */
+#deskHud {
+  position: absolute; top: calc(var(--topbar-h) + 34px); left: 50%;
+  transform: translateX(-50%);
   z-index: 2;
-  width: min(430px, calc(100vw - 32px));
-  padding: 30px 28px 26px;
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  width: min(980px, calc(100vw - 40px));
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 14px;
+  align-items: stretch;
+}
+
+/* ——— Tarjeta de bienvenida ——— */
+#welcome {
+  height: 100%;
+  min-width: 0;
+  padding: 28px 26px 24px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
   text-align: center;
   background: var(--glass);
   -webkit-backdrop-filter: blur(28px) saturate(1.5);
@@ -238,11 +248,11 @@ button { font-family: inherit; color: inherit; }
   border: 1px solid var(--line-strong);
   border-radius: var(--r-win);
   box-shadow: var(--shadow-win);
-  animation: welcomeIn .7s var(--spring) .35s both;
+  animation: hudIn .7s var(--spring) .3s both;
 }
-@keyframes welcomeIn {
-  from { opacity: 0; transform: translate(-50%, -46%) scale(.97); filter: blur(8px); }
-  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0); }
+@keyframes hudIn {
+  from { opacity: 0; transform: translateY(16px) scale(.98); filter: blur(8px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
 }
 .welcome-avatar {
   width: 72px; height: 72px; border-radius: 50%;
@@ -267,6 +277,116 @@ button { font-family: inherit; color: inherit; }
 .welcome-actions {
   display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
   margin-top: 10px;
+}
+
+/* ——— Paneles del HUD ——— */
+.hud-card {
+  min-width: 0; min-height: 0;
+  display: flex; flex-direction: column;
+  padding: 15px 17px;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(26px) saturate(1.5);
+  backdrop-filter: blur(26px) saturate(1.5);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-win);
+  box-shadow: var(--shadow-win);
+  animation: hudIn .7s var(--spring) .42s both;
+}
+.hud-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  margin-bottom: 10px;
+}
+.hud-title {
+  margin: 0;
+  font-size: 11.5px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase;
+  color: var(--ink-2);
+}
+.hud-sub { font-size: 10.5px; color: var(--ink-3); text-decoration: none; white-space: nowrap; }
+.hud-link { transition: color .25s; }
+.hud-link:hover { color: var(--accent); }
+
+/* ——— Actividad GitHub ——— */
+#ghActivity { max-height: 348px; }
+.gh-list {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 9px;
+  flex: 1; min-height: 0; overflow-y: auto;
+}
+.gh-item { display: flex; gap: 9px; align-items: flex-start; }
+.gh-ico {
+  width: 22px; height: 22px; flex: 0 0 auto;
+  display: grid; place-items: center;
+  border-radius: 6px;
+  background: var(--surface-2); border: 1px solid var(--line);
+  color: var(--accent);
+}
+.gh-ico svg { width: 12px; height: 12px; }
+.gh-text { margin: 0; font-size: 12.5px; line-height: 1.4; color: var(--ink-2); }
+.gh-text b { color: var(--ink); font-weight: 600; }
+.gh-time { display: block; margin-top: 2px; font-size: 10.5px; color: var(--ink-3); }
+.gh-empty { font-size: 12px; color: var(--ink-3); padding: 2px 0; }
+
+/* ——— Chismografía Técnica ——— */
+#chisme { grid-column: 1 / -1; min-height: 158px; }
+.chisme-body { flex: 1; min-height: 0; display: flex; }
+.chisme-list {
+  display: flex; gap: 10px; width: 100%;
+  overflow-x: auto; padding-bottom: 2px;
+}
+.chisme-item {
+  flex: 0 0 300px; max-width: 320px;
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 10px 12px;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 12px;
+  color: inherit; text-decoration: none;
+  transition: transform .3s var(--spring), border-color .25s, background .25s;
+}
+.chisme-item:hover { transform: translateY(-2px); border-color: var(--line-strong); background: var(--surface-2); }
+.chisme-item h3 { margin: 0; font-size: 12.5px; font-weight: 650; color: var(--ink); }
+.chisme-item p {
+  margin: 0; font-size: 12px; line-height: 1.45; color: var(--ink-2);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.chisme-item time { margin-top: auto; font-size: 10.5px; color: var(--ink-3); }
+.chisme-state { margin: 0; align-self: center; font-size: 12.5px; color: var(--ink-3); }
+
+/* Estado vacío: rodadora pixel-art */
+.chisme-empty { flex: 1; display: flex; align-items: center; justify-content: center; gap: 18px; min-height: 0; }
+.desert {
+  position: relative; flex: 0 0 auto;
+  width: 190px; height: 70px;
+  border-radius: 10px; overflow: hidden;
+  background: linear-gradient(180deg, transparent 52%, rgba(201, 154, 74, .10) 53%, rgba(201, 154, 74, .18));
+  border: 1px solid var(--line);
+}
+.desert::after {
+  content: ""; position: absolute; left: 8px; right: 8px; bottom: 6px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 154, 74, .5), transparent);
+}
+.tumble {
+  position: absolute; bottom: 12px; left: 0;
+  width: 38px; height: 38px;
+  animation: tumbleMove 6s linear infinite;
+}
+.tumble-hop { display: block; width: 100%; height: 100%; animation: tumbleHop .6s ease-in-out infinite alternate; }
+.tumble svg {
+  width: 100%; height: 100%;
+  image-rendering: pixelated;
+  animation: tumbleSpin 1.2s steps(8, end) infinite;
+}
+@keyframes tumbleMove { from { transform: translateX(0); } to { transform: translateX(140px); } }
+@keyframes tumbleHop { from { transform: translateY(0); } to { transform: translateY(-5px); } }
+@keyframes tumbleSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .tumble { animation: none; transform: translateX(60px); }
+  .tumble-hop, .tumble svg { animation: none; }
+}
+[data-motion="off"] .tumble { animation: none !important; transform: translateX(60px); }
+[data-motion="off"] .tumble-hop, [data-motion="off"] .tumble svg { animation: none !important; }
+.chisme-empty p {
+  margin: 0; max-width: 26ch;
+  font-size: 13px; line-height: 1.5; color: var(--ink-3); font-style: italic;
 }
 
 /* ═══════════════ DOCK ═══════════════ */
@@ -338,8 +458,18 @@ button { font-family: inherit; color: inherit; }
 
 /* ═══════════════ RESPONSIVE ═══════════════ */
 @media (max-width: 768px) {
-  #welcome { top: 42%; padding: 24px 20px 22px; }
+  #deskHud {
+    top: calc(var(--topbar-h) + 12px);
+    width: calc(100vw - 24px);
+    grid-template-columns: 1fr;
+    max-height: calc(100vh - var(--topbar-h) - var(--dock-h) - 40px);
+    overflow-y: auto;
+    padding: 2px;
+  }
+  #welcome { padding: 22px 18px; }
   .welcome-role { font-size: 17px; }
+  #ghActivity { max-height: 230px; }
+  #chisme { min-height: 150px; }
   #dock {
     left: 8px; right: 8px; transform: none;
     justify-content: space-around; gap: 2px;

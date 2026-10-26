@@ -66,18 +66,40 @@
       </div>
     </header>
 
-    <!-- Tarjeta de bienvenida -->
-    <section id="welcome" class="welcome-card">
-      <img class="welcome-avatar" src="https://github.com/AlainVA7.png" width="72" height="72" alt="Alain">
-      <p class="welcome-hi" data-i18n="welcome.hi">Hola, soy Alain</p>
-      <h1 class="welcome-role" data-i18n="about.role">Técnico Superior en Telecomunicaciones e IT · Estudiante de IA</h1>
-      <p class="welcome-line" data-i18n="welcome.line">Redes, sistemas e IA: construyo, cacharreo y sigo aprendiendo.</p>
-      <div class="welcome-actions">
-        <button class="btn btn-primary" data-open="projects" type="button" data-i18n="about.cta">Ver proyectos</button>
-        <button class="btn btn-ghost" data-open="cv" type="button" data-i18n="about.cv">Ver CV</button>
-        <button class="btn btn-ghost" data-open="contact" type="button" data-i18n="app.contact">Contacto</button>
-      </div>
-    </section>
+    <!-- HUD del escritorio -->
+    <div id="deskHud">
+      <section id="welcome" class="welcome-card">
+        <img class="welcome-avatar" src="https://github.com/AlainVA7.png" width="72" height="72" alt="Alain">
+        <p class="welcome-hi" data-i18n="welcome.hi">Hola, soy Alain</p>
+        <h1 class="welcome-role" data-i18n="about.role">Técnico Superior en Telecomunicaciones e IT · Estudiante de IA</h1>
+        <p class="welcome-line" data-i18n="welcome.line">Redes, sistemas e IA: construyo, cacharreo y sigo aprendiendo.</p>
+        <div class="welcome-actions">
+          <button class="btn btn-primary" data-open="projects" type="button" data-i18n="about.cta">Ver proyectos</button>
+          <button class="btn btn-ghost" data-open="cv" type="button" data-i18n="about.cv">Ver CV</button>
+          <button class="btn btn-ghost" data-open="contact" type="button" data-i18n="app.contact">Contacto</button>
+        </div>
+      </section>
+
+      <section id="ghActivity" class="hud-card" aria-labelledby="ghTitle">
+        <header class="hud-head">
+          <h2 class="hud-title" id="ghTitle" data-i18n="gh.title">Actividad reciente</h2>
+          <span class="hud-sub">GitHub</span>
+        </header>
+        <ul class="gh-list" id="ghEvents">
+          <li class="gh-empty" data-i18n="gh.loading">Cargando actividad…</li>
+        </ul>
+      </section>
+
+      <section id="chisme" class="hud-card" aria-labelledby="chismeTitle">
+        <header class="hud-head">
+          <h2 class="hud-title" id="chismeTitle" data-i18n="chisme.title">Chismografía Técnica</h2>
+          <a class="hud-sub hud-link" href="https://github.com/AlainVA7/AlainVA7.github.io/issues/new?labels=chisme" target="_blank" rel="noopener" data-i18n="chisme.write">Escribir chisme</a>
+        </header>
+        <div class="chisme-body" id="chismeBody">
+          <p class="chisme-state" data-i18n="chisme.loading">Cargando chismes…</p>
+        </div>
+      </section>
+    </div>
 
     <!-- Capa de paneles -->
     <div id="winLayer">

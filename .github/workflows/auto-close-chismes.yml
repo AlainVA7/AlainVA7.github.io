@@ -1,0 +1,56 @@
+name: Cerrar chismes antiguos
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cerrar issues "chisme" con más de 15 días
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const label = 'chisme';
+
+            try {
+              await github.rest.issues.getLabel({ owner, repo, name: label });
+            } catch (e) {
+              await github.rest.issues.createLabel({
+                owner,
+                repo,
+                name: label,
+                color: '58A6FF',
+                description: 'Noticias para la Chismografía Técnica'
+              });
+            }
+
+            const cutoff = Date.now() - 15 * 24 * 60 * 60 * 1000;
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              labels: label,
+              state: 'open',
+              per_page: 100
+            });
+
+            for (const issue of issues) {
+              if (issue.pull_request) continue;
+              if (new Date(issue.created_at).getTime() < cutoff) {
+                await github.rest.issues.update({
+                  owner,
+                  repo,
+                  issue_number: issue.number,
+                  state: 'closed',
+                  state_reason: 'not_planned'
+                });
+                core.info(`Cerrado #${issue.number}: ${issue.title}`);
+              }
+            }
