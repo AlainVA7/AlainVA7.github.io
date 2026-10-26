@@ -302,8 +302,6 @@ button { font-family: inherit; color: inherit; }
   color: var(--ink-2);
 }
 .hud-sub { font-size: 10.5px; color: var(--ink-3); text-decoration: none; white-space: nowrap; }
-.hud-link { transition: color .25s; }
-.hud-link:hover { color: var(--accent); }
 
 /* ——— Actividad GitHub ——— */
 #ghActivity { max-height: 348px; }

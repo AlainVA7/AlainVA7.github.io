@@ -134,14 +134,55 @@
       '<g fill="#6f2a28"><rect x="86" y="82" width="10" height="4"/><rect x="160" y="84" width="14" height="3"/><rect x="16" y="86" width="8" height="3"/></g>' +
     '</svg>';
 
-  var TUMBLEWEED =
-    '<svg viewBox="0 0 24 24" shape-rendering="crispEdges" aria-hidden="true">' +
-      '<g fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-        '<path d="M4 13C6 6 14 4 18 9c3 4-1 10-6 10S4 15 6 11c2-4 7-5 10-2 3 3 0 7-4 7-3 0-4-3-2-5" stroke="#6b4218" stroke-width="1.2"/>' +
-        '<path d="M3 10c5 2 12 6 17 2M5 16c4-6 8-10 14-8M7 5c3 7 5 13 9 13M10 3c-1 6 2 12 8 14M4 8c6 1 12 0 16 7" stroke="#7d4e1c" stroke-width="1.1"/>' +
-        '<path d="M8 19c-1-4 1-8 4-10 2-2 5-2 6 0M11 4c3 1 6 4 6 8" stroke="#8f5c24" stroke-width="1"/>' +
-      '</g>' +
-    '</svg>';
+  var TUMBLE_COLORS = { d: "#5a3a14", m: "#7a4e1c", l: "#9a6626", h: "#b98233" };
+  var TUMBLE_MAP = [
+    "...............l............",
+    ".............l..............",
+    ".........l..................",
+    ".........llll...lll.........",
+    "........lll.lllllll.........",
+    "......ll.ll.lll...llll......",
+    ".....l.llll...lllll.lll.....",
+    "....lllll.llll.lllll..l.....",
+    "....lllll...llll..lllllll...",
+    "...llll.l.....ll.l.ll.lll...",
+    "...mm.mh..hmm.mh.mm.h.m..m..",
+    "...mmm....mmmm.m..m..m...m..",
+    ".....mmm..mh.h..mmhmmm.mhm..",
+    "....mmmm.mm.hh.m.hm.mm......",
+    "....mmmm.m..mmmh.mmmm.mm.m..",
+    "....h.mm..hmmm.hm.mmmm.m.mm.",
+    "....mmh..hmmm..mm.mh.m.mm...",
+    "...m.m.mhmmmm.mm.mmm.h.mm...",
+    ".m..m.mm.mhm.m.m.mm...m.....",
+    "....ddddd.....ddd.ddd..dd..d",
+    ".....dddd.d.dd.d..ddd.dd....",
+    ".....ddddd..d.dd..d....d....",
+    "......ddddd.dd.d.d..........",
+    ".......d..d.d.dd..ddd.......",
+    "........ddd.dd.d..d.........",
+    "...........ddddd...d........",
+    ".........d..................",
+    "............d..............."
+  ];
+
+  function tumbleweedSvg() {
+    var out = '<svg viewBox="0 0 28 28" shape-rendering="crispEdges" aria-hidden="true">';
+    TUMBLE_MAP.forEach(function (row, y) {
+      var x = 0;
+      while (x < row.length) {
+        var c = row[x];
+        if (c === ".") { x++; continue; }
+        var w = 1;
+        while (x + w < row.length && row[x + w] === c) w++;
+        out += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="1" fill="' + (TUMBLE_COLORS[c] || TUMBLE_COLORS.m) + '"/>';
+        x += w;
+      }
+    });
+    return out + "</svg>";
+  }
+
+  var TUMBLEWEED = tumbleweedSvg();
 
   function fmtTpl(key, data) {
     return Lang.t(key).replace(/\{(\w+)\}/g, function (m, k) {
