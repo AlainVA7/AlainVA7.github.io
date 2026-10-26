@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════
-   AlainOS — i18n (ES / EN)
+   Deskroom — i18n (ES / EN)
    ═══════════════════════════════════════════ */
 "use strict";
 
@@ -14,8 +14,7 @@ var I18N = {
     "app.about": "Sobre mí",
     "app.projects": "Proyectos",
     "app.skills": "Skills",
-    "app.terminal": "Terminal",
-    "app.blog": "Notas",
+    "app.cv": "CV",
     "app.contact": "Contacto",
     "app.settings": "Ajustes",
     /* sobre mí */
@@ -32,6 +31,8 @@ var I18N = {
     "about.i3": "Automatización",
     "about.i4": "Ciberseguridad",
     "about.cta": "Ver proyectos",
+    "about.cv": "Ver CV",
+    "about.cvDl": "Descargar",
     /* proyectos */
     "proj.search": "Buscar proyecto…",
     "proj.all": "Todos",
@@ -52,16 +53,10 @@ var I18N = {
     "skills.chip2": "Docker",
     "skills.chip3": "Proxmox",
     "skills.chip4": "IA",
-    /* terminal */
-    "term.ph": "escribe help…",
-    /* blog */
-    "blog.empty": "Aún no hay notas",
-    "blog.emptyHint": "Añade una nota en content/posts/ del repositorio y aparecerá aquí.",
-    "blog.back": "Volver",
-    "blog.on": "en",
-    "blog.read": "lectura",
-    "blog.loading": "Cargando nota…",
-    "blog.error": "No se pudo cargar la nota.",
+    /* cv */
+    "cv.hint": "Visor del CV — usa los botones para abrirlo o descargarlo.",
+    "cv.open": "Abrir",
+    "cv.download": "Descargar PDF",
     /* contacto */
     "contact.lead": "¿Tienes una idea, una pregunta o un proyecto? Hablemos.",
     "contact.email": "Gmail",
@@ -79,45 +74,7 @@ var I18N = {
     "set.sys": "Sistema",
     "set.motion": "Animaciones",
     "set.boot": "Pantalla de arranque",
-    "set.about": "AlainOS 1.0 — portfolio personal. Hecho con HTML, CSS y JavaScript puro.",
-    /* terminal comandos */
-    "term.help.t": "Comandos disponibles",
-    "term.help.whoami": "muestra tu perfil",
-    "term.help.neofetch": "ficha del sistema",
-    "term.help.projects": "lista tus proyectos",
-    "term.help.open": "abre una app: open blog",
-    "term.help.skills": "tus habilidades",
-    "term.help.blog": "lista tus notas",
-    "term.help.theme": "cambia tema: theme dark|light",
-    "term.help.lang": "cambia idioma: lang es|en",
-    "term.help.date": "fecha y hora actuales",
-    "term.help.echo": "imprime texto",
-    "term.help.cat": "lee contenido: cat about",
-    "term.help.clear": "limpia la pantalla",
-    "term.help.sudo": "permisos de administrador",
-    "term.hint": "Escribe help para ver los comandos. Usa Tab para autocompletar y ↑/↓ para el historial.",
-    "term.welcome": "AlainOS Terminal — sesión iniciada.",
-    "term.notfound": "comando no encontrado",
-    "term.didyoumean": "¿quizá",
-    "term.usage": "uso",
-    "term.openHint": "apps: about, projects, skills, terminal, blog, contact, settings",
-    "term.themeUse": "uso: theme dark | theme light",
-    "term.langUse": "uso: lang es | lang en",
-    "term.themeSet": "tema cambiado a",
-    "term.langSet": "idioma cambiado a",
-    "term.catHint": "disponible: about",
-    "term.echoEmpty": "escribe algo: echo hola",
-    "term.sudo1": "[sudo] contraseña para visitor: ",
-    "term.sudo2": "visitor no está en el archivo de usuarios. Este incidente será reportado.",
-    "term.projectsEmpty": "aún no hay proyectos",
-    "term.blogEmpty": "aún no hay notas",
-    "term.cleared": "",
-    "term.whoami.name": "nombre",
-    "term.whoami.user": "usuario",
-    "term.whoami.role": "rol",
-    "term.whoami.loc": "ubicación",
-    "term.whoami.site": "web",
-    "term.help.cat": "lee contenido: cat about"
+    "set.about": "Deskroom 1.0 — portfolio personal. Hecho con HTML, CSS y JavaScript puro."
   },
 
   en: {
@@ -130,8 +87,7 @@ var I18N = {
     "app.about": "About",
     "app.projects": "Projects",
     "app.skills": "Skills",
-    "app.terminal": "Terminal",
-    "app.blog": "Notes",
+    "app.cv": "CV",
     "app.contact": "Contact",
     "app.settings": "Settings",
     /* about */
@@ -148,6 +104,8 @@ var I18N = {
     "about.i3": "Automation",
     "about.i4": "Cybersecurity",
     "about.cta": "View projects",
+    "about.cv": "View CV",
+    "about.cvDl": "Download",
     /* projects */
     "proj.search": "Search projects…",
     "proj.all": "All",
@@ -168,16 +126,10 @@ var I18N = {
     "skills.chip2": "Docker",
     "skills.chip3": "Proxmox",
     "skills.chip4": "AI",
-    /* terminal */
-    "term.ph": "type help…",
-    /* blog */
-    "blog.empty": "No notes yet",
-    "blog.emptyHint": "Add a note in content/posts/ of the repository and it will show up here.",
-    "blog.back": "Back",
-    "blog.on": "on",
-    "blog.read": "read",
-    "blog.loading": "Loading note…",
-    "blog.error": "Could not load the note.",
+    /* cv */
+    "cv.hint": "CV viewer — use the buttons to open or download it.",
+    "cv.open": "Open",
+    "cv.download": "Download PDF",
     /* contact */
     "contact.lead": "Got an idea, a question or a project? Let's talk.",
     "contact.email": "Gmail",
@@ -195,45 +147,7 @@ var I18N = {
     "set.sys": "System",
     "set.motion": "Animations",
     "set.boot": "Boot screen",
-    "set.about": "AlainOS 1.0 — personal portfolio. Built with plain HTML, CSS and JavaScript.",
-    /* terminal commands */
-    "term.help.t": "Available commands",
-    "term.help.whoami": "show your profile",
-    "term.help.neofetch": "system info card",
-    "term.help.projects": "list your projects",
-    "term.help.open": "open an app: open blog",
-    "term.help.skills": "your skills",
-    "term.help.blog": "list your notes",
-    "term.help.theme": "change theme: theme dark|light",
-    "term.help.lang": "change language: lang es|en",
-    "term.help.date": "current date and time",
-    "term.help.echo": "print text",
-    "term.help.cat": "read content: cat about",
-    "term.help.clear": "clear the screen",
-    "term.help.sudo": "administrator privileges",
-    "term.hint": "Type help to see commands. Use Tab to complete and ↑/↓ for history.",
-    "term.welcome": "AlainOS Terminal — session started.",
-    "term.notfound": "command not found",
-    "term.didyoumean": "did you mean",
-    "term.usage": "usage",
-    "term.openHint": "apps: about, projects, skills, terminal, blog, contact, settings",
-    "term.themeUse": "usage: theme dark | theme light",
-    "term.langUse": "usage: lang es | lang en",
-    "term.themeSet": "theme changed to",
-    "term.langSet": "language changed to",
-    "term.catHint": "available: about",
-    "term.echoEmpty": "type something: echo hello",
-    "term.sudo1": "[sudo] password for visitor: ",
-    "term.sudo2": "visitor is not in the sudoers file. This incident will be reported.",
-    "term.projectsEmpty": "no projects yet",
-    "term.blogEmpty": "no notes yet",
-    "term.cleared": "",
-    "term.whoami.name": "name",
-    "term.whoami.user": "user",
-    "term.whoami.role": "role",
-    "term.whoami.loc": "location",
-    "term.whoami.site": "site",
-    "term.help.cat": "read content: cat about"
+    "set.about": "Deskroom 1.0 — personal portfolio. Built with plain HTML, CSS and JavaScript."
   }
 };
 

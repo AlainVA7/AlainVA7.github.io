@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════
-   AlainOS — main: boot, reloj, arranque
+   Deskroom — main: boot, reloj, arranque
    ═══════════════════════════════════════════ */
 "use strict";
 
@@ -14,19 +14,6 @@
       var m = q || localStorage.getItem("alain.motion");
       if (m) { root.dataset.motion = m; try { localStorage.setItem("alain.motion", m); } catch (e) {} }
     } catch (e) {}
-  }
-
-  /* ——— marked (markdown) con fallback silencioso ——— */
-  function loadMarked() {
-    return new Promise(function (resolve) {
-      if (window.marked) return resolve();
-      var s = document.createElement("script");
-      s.src = "https://cdn.jsdelivr.net/npm/marked/marked.min.js";
-      s.onload = function () { resolve(); };
-      s.onerror = function () { resolve(); }; /* blog.js tiene fallback */
-      document.head.appendChild(s);
-      setTimeout(resolve, 4000);
-    });
   }
 
   /* ——— reloj de la barra superior ——— */
@@ -92,16 +79,10 @@
     });
   }
 
-  /* ——— apps por URL: alainva7.github.io#projects ——— */
-  var APP_IDS = ["about", "projects", "skills", "terminal", "blog", "contact", "settings"];
+  /* ——— paneles por URL: alainva7.github.io#projects ——— */
+  var APP_IDS = ["about", "projects", "skills", "cv", "contact", "settings"];
   function openFromHash() {
     var id = (location.hash || "").replace("#", "").toLowerCase();
-    /* deep-link a una nota: #blog/<id> */
-    if (id.indexOf("blog/") === 0) {
-      WM.open("blog");
-      document.dispatchEvent(new CustomEvent("blogopen", { detail: id.slice(5) }));
-      return;
-    }
     if (APP_IDS.indexOf(id) !== -1) WM.open(id);
   }
   window.addEventListener("hashchange", openFromHash);
@@ -114,9 +95,6 @@
     wireLangSwitch();
     WM.init();
     Apps.init();
-    WM.hook("terminal", Terminal.init);
-    WM.hook("blog", Blog.init);
-    loadMarked();
     boot();
     setTimeout(openFromHash, 60);
   });

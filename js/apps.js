@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════
-   AlainOS — Apps: proyectos, skills, contacto,
-   ajustes (sobre mí es estático en index.html)
+   Deskroom — Apps: proyectos, skills, contacto,
+   ajustes (sobre mí y CV son estáticos en index.html)
    ═══════════════════════════════════════════ */
 "use strict";
 
@@ -280,20 +280,18 @@ var Apps = (function () {
     });
 
     /* re-render al cambiar idioma si están abiertas */
+    var TITLES = { about: "app.about", projects: "app.projects", skills: "app.skills", cv: "app.cv", contact: "app.contact", settings: "app.settings" };
     document.addEventListener("langchange", function () {
       if (WM.isOpen("projects")) { renderFilters(); renderProjects(false); renderMeta(); }
       if (WM.isOpen("skills")) renderSkills(openWin("skills"));
-      document.querySelectorAll(".window .win-title-txt").forEach(function (el) {
-        var w = el.closest(".window");
-        el.textContent = Lang.t({ about: "app.about", projects: "app.projects", skills: "app.skills", terminal: "app.terminal", blog: "app.blog", contact: "app.contact", settings: "app.settings" }[w.dataset.app] || "");
+      document.querySelectorAll(".panel .panel-title-txt").forEach(function (el) {
+        var p = el.closest(".panel");
+        el.textContent = Lang.t(TITLES[p.dataset.app] || "");
       });
-      var tb = document.getElementById("tbApp");
-      var f = document.querySelector(".window.focused");
-      if (tb && f) tb.textContent = Lang.t({ about: "app.about", projects: "app.projects", skills: "app.skills", terminal: "app.terminal", blog: "app.blog", contact: "app.contact", settings: "app.settings" }[f.dataset.app] || "");
     });
   }
 
-  function openWin(appId) { return document.querySelector('.window[data-app="' + appId + '"]'); }
+  function openWin(appId) { return document.querySelector('.panel[data-app="' + appId + '"]'); }
 
   return { init: init, loadProjects: loadProjects };
 })();

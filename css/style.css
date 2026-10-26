@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════
-   AlainOS — shell: tokens, temas, boot, chrome
+   Deskroom — shell: tokens, temas, boot, chrome
    ═══════════════════════════════════════════ */
 
 :root {
@@ -203,12 +203,6 @@ button { font-family: inherit; color: inherit; }
   font-weight: 600; letter-spacing: .05em; color: var(--ink);
 }
 .tb-brand svg { color: var(--accent); }
-.tb-app {
-  color: var(--ink-3); font-weight: 500;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  transition: color .25s;
-}
-.tb-app:not(:empty)::before { content: "·"; margin-right: 10px; color: var(--ink-3); }
 .tb-right { display: flex; align-items: center; gap: 12px; }
 .tb-clock { font-variant-numeric: tabular-nums; color: var(--ink-2); letter-spacing: .02em; white-space: nowrap; }
 
@@ -328,7 +322,7 @@ button { font-family: inherit; color: inherit; }
 
 /* ═══════════════ LAYER ═══════════════ */
 #winLayer { position: absolute; inset: var(--topbar-h) 0 0 0; z-index: 10; pointer-events: none; }
-#winLayer .window { pointer-events: auto; }
+#winLayer .panel { pointer-events: auto; }
 
 /* ═══════════════ RESPONSIVE ═══════════════ */
 @media (max-width: 768px) {
@@ -343,7 +337,6 @@ button { font-family: inherit; color: inherit; }
   .dock-btn { width: 40px; height: 40px; }
   .dock-icon { width: 36px; height: 36px; }
   .dock-tip { display: none; }
-  .tb-app { display: none; }
   .tb-clock { font-size: 11.5px; }
 }
 @media (max-width: 420px) {

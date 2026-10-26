@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════
-   AlainOS — datos editables del perfil
+   Deskroom — datos editables del perfil
    (este es el único archivo que tocas para
    cambiar tu perfil y tus skills)
    ═══════════════════════════════════════════ */
@@ -29,12 +29,6 @@ var SKILLS = [
   { id: "ai",         level: 40, name: { es: "Inteligencia Artificial", en: "Artificial Intelligence" } },
   { id: "grafana",    level: 35, name: { es: "Grafana / Monitorización", en: "Grafana / Monitoring" } }
 ];
-
-/* Contenido de "cat about" en terminal */
-var ABOUT_TEXT = {
-  es: "Alain — Técnico Superior en Telecomunicaciones y Sistemas Informáticos.\nEstudiando la especialización de Inteligencia Artificial.\nMe apasiona la informática y sigo aprendiendo cada día.",
-  en: "Alain — Higher Technician in Telecommunications and Computer Systems.\nStudying the Artificial Intelligence specialization.\nI'm a computer enthusiast and keep learning every day."
-};
 
 /* Colores por lenguaje (para las tarjetas de proyecto) */
 var LANG_COLORS = {

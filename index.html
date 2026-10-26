@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alain — Telecom &amp; IT · AI</title>
-  <meta name="description" content="Portfolio interactivo de Alain (AlainVA7) — Telecom &amp; IT Technician, estudiante de IA. Proyectos, notas y contacto.">
+  <title>Deskroom — Alain · Telecom &amp; IT</title>
+  <meta name="description" content="Deskroom de Alain (AlainVA7) — técnico en Telecomunicaciones e IT. Proyectos, skills, CV y contacto en paneles interactivos.">
   <meta name="color-scheme" content="dark light">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1117'/%3E%3Cpath d='M32 12 L48 52 H40 L37 43 H27 L24 52 H16 Z M32 26 L29 36 H35 Z' fill='%2358A6FF'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +40,7 @@
         <rect width="64" height="64" rx="16" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
         <path d="M32 12 L48 52 H40 L37 43 H27 L24 52 H16 Z M32 26 L29 36 H35 Z" fill="#58A6FF"/>
       </svg>
-      <div class="boot-name">AlainOS</div>
+      <div class="boot-name">Deskroom</div>
       <div class="boot-bar"><span id="bootFill"></span></div>
       <div class="boot-hint" data-i18n="boot.hint">Pulsar para saltar</div>
     </div>
@@ -52,11 +52,10 @@
     <!-- Barra superior -->
     <header id="topbar">
       <div class="tb-left">
-        <span class="tb-brand" aria-label="AlainOS">
+        <span class="tb-brand" aria-label="Deskroom">
           <svg viewBox="0 0 64 64" width="16" height="16" aria-hidden="true"><path d="M32 12 L48 52 H40 L37 43 H27 L24 52 H16 Z M32 26 L29 36 H35 Z" fill="currentColor"/></svg>
-          AlainOS
+          Deskroom
         </span>
-        <span class="tb-app" id="tbApp"></span>
       </div>
       <div class="tb-right">
         <div class="lang-switch" role="group" aria-label="Idioma / Language">
@@ -77,18 +76,20 @@
         <span class="dicon-img"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="4.5" width="7" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3.5" y="14" width="7" height="5.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="14" width="7" height="5.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/></svg></span>
         <span class="dicon-label" data-i18n="app.projects">Proyectos</span>
       </button>
-      <button class="dicon" data-open="terminal" type="button">
-        <span class="dicon-img"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M7.5 10l3 2.2-3 2.2M12.5 14.5H16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="dicon-label" data-i18n="app.terminal">Terminal</span>
+      <button class="dicon" data-open="skills" type="button">
+        <span class="dicon-img"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V13M10 20V8M16 20v-9M21.5 20V4.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" fill="none"/></svg></span>
+        <span class="dicon-label" data-i18n="app.skills">Skills</span>
       </button>
-      <button class="dicon" data-open="blog" type="button">
-        <span class="dicon-img"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h9.5L19 7v13a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1-1.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.5 11h7M8.5 15h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-        <span class="dicon-label" data-i18n="app.blog">Notas</span>
+      <button class="dicon" data-open="contact" type="button">
+        <span class="dicon-img"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4.5 8l7.5 5.2L19.5 8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="dicon-label" data-i18n="app.contact">Contacto</span>
       </button>
     </nav>
 
-    <!-- Capa de ventanas -->
-    <div id="winLayer"></div>
+    <!-- Capa de paneles -->
+    <div id="winLayer">
+      <div id="panelBackdrop"></div>
+    </div>
 
     <!-- Dock -->
     <nav id="dock" data-i18n-aria="dock.aria" aria-label="Dock">
@@ -107,16 +108,11 @@
         <span class="dock-dot" aria-hidden="true"></span>
         <span class="dock-tip" data-i18n="app.skills">Skills</span>
       </button>
-      <button class="dock-btn" data-open="terminal" type="button" data-i18n-title="app.terminal" aria-label="Terminal">
-        <span class="dock-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M7.5 10l3 2.2-3 2.2M12.5 14.5H16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="dock-dot" aria-hidden="true"></span>
-        <span class="dock-tip" data-i18n="app.terminal">Terminal</span>
-      </button>
       <span class="dock-sep" aria-hidden="true"></span>
-      <button class="dock-btn" data-open="blog" type="button" data-i18n-title="app.blog" aria-label="Notas">
-        <span class="dock-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h9.5L19 7v13a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1-1.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.5 11h7M8.5 15h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+      <button class="dock-btn" data-open="cv" type="button" data-i18n-title="app.cv" aria-label="CV">
+        <span class="dock-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h8.5L19 8v12.5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-16a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3.5V8h5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.5 12.5h7M8.5 16h4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
         <span class="dock-dot" aria-hidden="true"></span>
-        <span class="dock-tip" data-i18n="app.blog">Notas</span>
+        <span class="dock-tip" data-i18n="app.cv">CV</span>
       </button>
       <button class="dock-btn" data-open="contact" type="button" data-i18n-title="app.contact" aria-label="Contacto">
         <span class="dock-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4.5 8l7.5 5.2L19.5 8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -168,6 +164,8 @@
       </div>
       <div class="about-actions">
         <button class="btn btn-primary" data-open="projects" type="button" data-i18n="about.cta">Ver proyectos</button>
+        <button class="btn btn-ghost" data-open="cv" type="button" data-i18n="about.cv">Ver CV</button>
+        <a class="btn btn-ghost" href="assets/cv.pdf" download data-i18n="about.cvDl">Descargar</a>
         <button class="btn btn-ghost" data-open="contact" type="button" data-i18n="app.contact">Contacto</button>
       </div>
     </div>
@@ -200,20 +198,16 @@
     </div>
   </template>
 
-  <template id="tpl-terminal">
-    <div class="app terminal-app">
-      <div id="termOut" class="term-out" role="log" aria-live="polite"></div>
-      <form id="termForm" class="term-input-row" autocomplete="off">
-        <span class="term-prompt" id="termPrompt">visitor@alainos:~$</span>
-        <input id="termInput" type="text" data-i18n-ph="term.ph" placeholder="escribe help…" spellcheck="false" aria-label="Entrada de terminal">
-      </form>
-    </div>
-  </template>
-
-  <template id="tpl-blog">
-    <div class="app blog-app">
-      <div id="blogList" class="blog-list stagger" aria-live="polite"></div>
-      <article id="blogPost" class="blog-post" hidden></article>
+  <template id="tpl-cv">
+    <div class="app cv-app">
+      <div class="cv-toolbar">
+        <span class="cv-hint" data-i18n="cv.hint">Visor del CV — usa los botones para abrirlo o descargarlo.</span>
+        <div class="cv-actions">
+          <a class="btn btn-primary" href="assets/cv.pdf" target="_blank" rel="noopener" data-i18n="cv.open">Abrir</a>
+          <a class="btn btn-ghost" href="assets/cv.pdf" download data-i18n="cv.download">Descargar PDF</a>
+        </div>
+      </div>
+      <iframe class="cv-frame" src="assets/cv.pdf#toolbar=0" title="CV de Alain Vallecillos" loading="lazy"></iframe>
     </div>
   </template>
 
@@ -298,7 +292,7 @@
           <label class="switch"><input type="checkbox" id="setBoot" checked><span class="switch-track"></span></label>
         </div>
         <div class="set-row set-row-fine">
-          <span class="fine-text" data-i18n="set.about">AlainOS 1.0 — portfolio personal. Hecho con HTML, CSS y JavaScript puro.</span>
+          <span class="fine-text" data-i18n="set.about">Deskroom 1.0 — portfolio personal. Hecho con HTML, CSS y JavaScript puro.</span>
         </div>
       </section>
     </div>
@@ -307,8 +301,6 @@
   <script src="js/i18n.js"></script>
   <script src="js/data.js"></script>
   <script src="js/wm.js"></script>
-  <script src="js/terminal.js"></script>
-  <script src="js/blog.js"></script>
   <script src="js/apps.js"></script>
   <script src="js/main.js"></script>
 </body>
