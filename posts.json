@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-26T10:00:00Z",
+  "updated": "2026-10-26T10:16:54Z",
   "posts": [
     {
       "id": "2026-10-20-primer-contenedor-docker",
@@ -7,7 +7,10 @@
       "title_es": "Cómo monté mi primer contenedor con Docker",
       "title_en": "How I set up my first Docker container",
       "date": "2026-10-20",
-      "tags": ["docker", "linux"]
+      "tags": [
+        "docker",
+        "linux"
+      ]
     },
     {
       "id": "2026-10-08-notas-redes-ip-subredes",
@@ -15,7 +18,10 @@
       "title_es": "Notas de clase — redes: direcciones IP y subredes",
       "title_en": "Class notes — networking: IP addresses and subnets",
       "date": "2026-10-08",
-      "tags": ["redes", "telecom"]
+      "tags": [
+        "redes",
+        "telecom"
+      ]
     }
   ]
 }
