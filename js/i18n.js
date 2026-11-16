@@ -45,7 +45,6 @@ var I18N = {
     "proj.public": "público",
     "proj.fork": "fork",
     /* skills */
-    "skills.note": "Estado de consolidación — sigo aprendiendo.",
     "skills.solid": "Consolidado",
     "skills.learning": "En aprendizaje",
     "skills.solidTag": "Consolidado",
@@ -150,7 +149,6 @@ var I18N = {
     "proj.public": "public",
     "proj.fork": "fork",
     /* skills */
-    "skills.note": "Consolidation status — still learning.",
     "skills.solid": "Consolidated",
     "skills.learning": "Learning",
     "skills.solidTag": "Consolidated",

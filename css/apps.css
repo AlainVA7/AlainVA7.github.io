@@ -157,7 +157,6 @@ a.pcard:visited, a.pcard:visited .pcard-name, a.pcard:visited .pcard-desc { colo
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ═══════════ SKILLS ═══════════ */
-.skills-note { margin: 0 0 14px; color: var(--ink-3); font-size: 13px; }
 .skills-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0 0 18px; }
 .legend-item { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--ink-2); }
 .legend-dot {
