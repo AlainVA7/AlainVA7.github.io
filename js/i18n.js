@@ -5,8 +5,6 @@
 
 var I18N = {
   es: {
-    /* boot */
-    "boot.hint": "Pulsar para saltar",
     /* chrome */
     "dock.aria": "Dock de aplicaciones",
     /* apps */
@@ -95,13 +93,10 @@ var I18N = {
     "set.lang": "Idioma",
     "set.langLabel": "Idioma de la interfaz",
     "set.sys": "Sistema",
-    "set.motion": "Animaciones",
-    "set.boot": "Pantalla de arranque"
+    "set.motion": "Animaciones"
   },
 
   en: {
-    /* boot */
-    "boot.hint": "Click to skip",
     /* chrome */
     "dock.aria": "Application dock",
     /* apps */
@@ -190,8 +185,7 @@ var I18N = {
     "set.lang": "Language",
     "set.langLabel": "Interface language",
     "set.sys": "System",
-    "set.motion": "Animations",
-    "set.boot": "Boot screen"
+    "set.motion": "Animations"
   }
 };
 
