@@ -1,11 +1,9 @@
 /* ═══════════════════════════════════════════
-   Deskroom — main: boot, reloj, arranque
+   Deskroom — main: reloj, HUD y arranque
    ═══════════════════════════════════════════ */
 "use strict";
 
 (function () {
-  window.__bootTime = Date.now();
-
   /* ——— preferencias guardadas ——— */
   function applyPrefs() {
     var root = document.documentElement;
@@ -41,42 +39,6 @@
       b.addEventListener("click", function () { Lang.set(b.dataset.lang); });
     });
     document.addEventListener("langchange", function () { applyI18n(document); });
-  }
-
-  /* ——— secuencia de boot ——— */
-  function boot() {
-    var bootEl = document.getElementById("boot");
-    var fill = document.getElementById("bootFill");
-    var desktop = document.getElementById("desktop");
-
-    var skip = false;
-    try { skip = localStorage.getItem("alain.boot") === "off"; } catch (e) {}
-    if (/[?&]skipboot/.test(location.search)) skip = true;
-
-    function finish(instant) {
-      if (bootEl.dataset.done) return;
-      bootEl.dataset.done = "1";
-      bootEl.classList.add("done");
-      if (instant) desktop.style.transition = "none";
-      desktop.classList.add("on");
-      setTimeout(function () { bootEl.style.display = "none"; }, instant ? 30 : 700);
-    }
-
-    if (skip) { finish(true); return; }
-
-    var p = 0;
-    var iv = setInterval(function () {
-      p += Math.random() * 22 + 8;
-      if (p >= 100) { p = 100; clearInterval(iv); setTimeout(function () { finish(); }, 260); }
-      fill.style.width = p + "%";
-    }, 130);
-
-    var skipFn = function () { clearInterval(iv); fill.style.width = "100%"; finish(); };
-    bootEl.addEventListener("click", skipFn, { once: true });
-    window.addEventListener("keydown", function k(e) {
-      window.removeEventListener("keydown", k);
-      skipFn();
-    });
   }
 
   /* ——— paneles por URL: alainva7.github.io#projects ——— */
@@ -352,7 +314,6 @@
     WM.init();
     Apps.init();
     initFeeds();
-    boot();
     setTimeout(openFromHash, 60);
   });
 })();

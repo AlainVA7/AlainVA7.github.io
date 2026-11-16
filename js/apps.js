@@ -253,15 +253,6 @@ var Apps = (function () {
         try { localStorage.setItem("alain.motion", motion.checked ? "on" : "off"); } catch (e) {}
       };
     }
-    /* boot */
-    var boot = win.querySelector("#setBoot");
-    if (boot) {
-      var hide = localStorage.getItem("alain.boot") === "off";
-      boot.checked = !hide;
-      boot.onchange = function () {
-        try { localStorage.setItem("alain.boot", boot.checked ? "on" : "off"); } catch (e) {}
-      };
-    }
   }
 
   /* ─────────── registro de hooks ─────────── */
