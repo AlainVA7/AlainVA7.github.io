@@ -274,7 +274,7 @@ a.pcard:visited, a.pcard:visited .pcard-name, a.pcard:visited .pcard-desc { colo
 .switch input:checked + .switch-track { background: var(--accent); }
 .switch input:checked + .switch-track::after { transform: translateX(18px); }
 /* Swatches de fondo */
-.walls { display: flex; gap: 9px; }
+.walls { display: flex; flex-wrap: wrap; gap: 9px; }
 .wall {
   width: 44px; height: 30px; border-radius: 9px; cursor: pointer;
   border: 2px solid transparent; padding: 0;
@@ -283,10 +283,14 @@ a.pcard:visited, a.pcard:visited .pcard-name, a.pcard:visited .pcard-desc { colo
 .wall:hover { transform: translateY(-2px) scale(1.05); }
 .wall.active { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(88, 166, 255, .25); }
 .wall-aurora { background: linear-gradient(135deg, #16324f, #0b1018 55%, #241a3e); }
-.wall-graphite { background: linear-gradient(135deg, #2a2e35, #14161a); }
+.wall-graphite { background: linear-gradient(135deg, #b98233, #2a2e35 35%, #14161a); }
 .wall-ocean { background: linear-gradient(135deg, #0d3b52, #0a2036 60%, #123f3a); }
+.wall-sunset { background: linear-gradient(180deg, #3a1240, #c0265b 55%, #ff9a5c); }
+.wall-matrix { background: linear-gradient(180deg, #04100a, #0a3d24 60%, #020604); }
 .wall-plain { background: linear-gradient(135deg, #10141b, #070a10); }
 [data-theme="light"] .wall-aurora { background: linear-gradient(135deg, #cfe2f8, #f2f6fb 55%, #e4d9f8); }
-[data-theme="light"] .wall-graphite { background: linear-gradient(135deg, #dfe4ea, #f4f6f9); }
+[data-theme="light"] .wall-graphite { background: linear-gradient(135deg, #f0c98a, #dfe4ea 35%, #f4f6f9); }
 [data-theme="light"] .wall-ocean { background: linear-gradient(135deg, #bfe0ef, #d8ecf7 60%, #cfe8e4); }
+[data-theme="light"] .wall-sunset { background: linear-gradient(180deg, #f3e6fb, #fbdce9 55%, #ffe2cf); }
+[data-theme="light"] .wall-matrix { background: linear-gradient(180deg, #d9f3e3, #bfe8ce 60%, #eef9f2); }
 [data-theme="light"] .wall-plain { background: linear-gradient(135deg, #f4f6f9, #eef2f7); }
