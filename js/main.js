@@ -51,7 +51,21 @@
 
   /* ——— HUD: actividad de GitHub + Notas técnicas ——— */
   var REPO = USER.username + "/" + USER.username + ".github.io";
+  var NOTES_REPO = "AlainVA7/deskroom-content";
   var activityState = { expanded: false, projects: [], commits: [] };
+
+  function setupOwnerMode() {
+    var on = false;
+    try {
+      var q = new URLSearchParams(location.search);
+      if (q.get("owner") === "0") localStorage.removeItem("alain.owner");
+      if (q.get("owner") === "1" || (location.hash || "").toLowerCase() === "#owner") {
+        localStorage.setItem("alain.owner", "1");
+      }
+      on = localStorage.getItem("alain.owner") === "1";
+    } catch (e) {}
+    document.body.classList.toggle("owner-mode", on);
+  }
 
   var DESERT_SCENE =
     '<svg class="desert-bg" viewBox="0 0 240 96" shape-rendering="crispEdges" aria-hidden="true">' +
@@ -387,49 +401,70 @@
     loadCommits(a.pushed);
   }
 
-  function tumbleEmpty() {
-    var wrap = el("div", "chisme-empty");
+  function notasEmpty() {
+    var wrap = el("div", "notas-empty");
     var desert = el("div", "desert");
     desert.innerHTML = DESERT_SCENE + '<span class="tumble"><span class="tumble-hop">' + TUMBLEWEED + '</span></span>';
     var p = el("p");
-    p.textContent = Lang.t("chisme.empty");
+    p.textContent = Lang.t("notas.empty");
     wrap.appendChild(desert);
     wrap.appendChild(p);
     return wrap;
   }
 
-  function renderChismes(issues) {
-    var body = document.getElementById("chismeBody");
+  function renderNotas(data) {
+    var body = document.getElementById("notasBody");
     if (!body) return;
+    var list = data && Array.isArray(data.notas) ? data.notas : [];
     body.textContent = "";
-    var cutoff = Date.now() - 15 * 24 * 60 * 60 * 1000;
-    var list = (issues || []).filter(function (i) {
-      return !i.pull_request && new Date(i.created_at).getTime() >= cutoff;
-    });
     if (!list.length) {
-      body.appendChild(tumbleEmpty());
+      body.appendChild(notasEmpty());
       return;
     }
-    var row = el("div", "chisme-list");
-    list.forEach(function (issue) {
-      var a = el("a", "chisme-item");
-      a.href = issue.html_url;
-      a.target = "_blank";
-      a.rel = "noopener";
-      var h = el("h3");
-      h.textContent = issue.title || "";
-      var p = el("p");
-      var text = (issue.body || "").replace(/\s+/g, " ").trim();
-      p.textContent = text || Lang.t("chisme.notext");
+    var note = list[0];
+    var card = el("article", "nota-item");
+    var h = el("h3");
+    h.textContent = note.title || Lang.t("notas.untitled");
+    var p = el("p");
+    p.textContent = (note.body || "").trim() || Lang.t("notas.notext");
+    card.appendChild(h);
+    card.appendChild(p);
+    var date = note.created_at || note.updated_at;
+    if (date) {
       var t = el("time");
-      t.dateTime = issue.created_at;
-      t.textContent = fmtDate(issue.created_at);
-      a.appendChild(h);
-      a.appendChild(p);
-      a.appendChild(t);
-      row.appendChild(a);
+      t.dateTime = date;
+      t.textContent = fmtDate(date);
+      card.appendChild(t);
+    }
+    body.appendChild(card);
+  }
+
+  function wireNotas() {
+    var form = document.getElementById("notaForm");
+    var newBtn = document.getElementById("notaNew");
+    var cancel = document.getElementById("notaCancel");
+    if (!form || !newBtn) return;
+    newBtn.addEventListener("click", function () {
+      form.hidden = !form.hidden;
+      if (!form.hidden) {
+        var t = document.getElementById("notaTitle");
+        if (t) t.focus();
+      }
     });
-    body.appendChild(row);
+    if (cancel) {
+      cancel.addEventListener("click", function () { form.hidden = true; });
+    }
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var title = (document.getElementById("notaTitle").value || "").trim();
+      var body = (document.getElementById("notaBody").value || "").trim();
+      if (!title) return;
+      var url = "https://github.com/" + NOTES_REPO + "/issues/new?labels=nota&title=" +
+        encodeURIComponent(title) + "&body=" + encodeURIComponent(body);
+      window.open(url, "_blank", "noopener");
+      form.reset();
+      form.hidden = true;
+    });
   }
 
   function loadActivity() {
@@ -445,16 +480,19 @@
     });
   }
 
-  function loadChismes() {
-    cachedJSON("alain.gh.chismes", 5 * 60 * 1000,
-      "https://api.github.com/repos/" + REPO + "/issues?labels=chisme&state=open&per_page=20&sort=created&direction=desc")
-      .then(renderChismes)
-      .catch(function () { renderChismes([]); });
+  function loadNotas() {
+    fetch("notas.json?cb=" + Date.now(), { cache: "no-store" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(renderNotas)
+      .catch(function () { renderNotas(null); });
   }
 
   function loadFeeds() {
     loadActivity();
-    loadChismes();
+    loadNotas();
   }
 
   function initFeeds() {
@@ -465,6 +503,7 @@
         renderActivityCommits();
       });
     }
+    wireNotas();
     loadFeeds();
     document.addEventListener("langchange", loadFeeds);
     setInterval(loadFeeds, 10 * 60 * 1000);
@@ -473,6 +512,7 @@
   /* ——— arranque ——— */
   document.addEventListener("DOMContentLoaded", function () {
     applyPrefs();
+    setupOwnerMode();
     applyI18n(document);
     startClock();
     wireLangSwitch();

@@ -95,12 +95,30 @@
         </div>
       </section>
 
-      <section id="chisme" class="hud-card" aria-labelledby="chismeTitle">
+      <section id="notas" class="hud-card" aria-labelledby="notasTitle">
         <header class="hud-head">
-          <h2 class="hud-title" id="chismeTitle" data-i18n="chisme.title">Chismografía Técnica</h2>
+          <h2 class="hud-title" id="notasTitle" data-i18n="notas.title">Notas técnicas</h2>
+          <div class="notas-tools owner-only">
+            <button class="notas-btn" id="notaNew" type="button" data-i18n="notas.new">Nueva nota</button>
+            <a class="notas-btn" id="notaHistory" href="https://github.com/AlainVA7/deskroom-content/issues?q=label%3Anota" target="_blank" rel="noopener" data-i18n="notas.history">Historial</a>
+          </div>
         </header>
-        <div class="chisme-body" id="chismeBody">
-          <p class="chisme-state" data-i18n="chisme.loading">Cargando chismes…</p>
+        <form class="nota-form owner-only" id="notaForm" hidden>
+          <label class="nota-field">
+            <span data-i18n="notas.fieldTitle">Título</span>
+            <input id="notaTitle" name="title" type="text" maxlength="120" required data-i18n-ph="notas.titlePh">
+          </label>
+          <label class="nota-field">
+            <span data-i18n="notas.fieldBody">Texto</span>
+            <textarea id="notaBody" name="body" rows="4" maxlength="4000" data-i18n-ph="notas.bodyPh"></textarea>
+          </label>
+          <div class="nota-actions">
+            <button class="notas-btn primary" type="submit" data-i18n="notas.submit">Abrir en GitHub</button>
+            <button class="notas-btn" id="notaCancel" type="button" data-i18n="notas.cancel">Cancelar</button>
+          </div>
+        </form>
+        <div class="notas-body" id="notasBody">
+          <p class="notas-state" data-i18n="notas.loading">Cargando notas…</p>
         </div>
       </section>
     </div>
