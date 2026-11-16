@@ -1,4 +1,11 @@
 {
-  "updated": "2026-11-16T10:29:00.198Z",
-  "notas": []
+  "updated": "2026-11-16T10:34:36.882Z",
+  "notas": [
+    {
+      "title": "nota",
+      "body": "Primera nota de deskroom.",
+      "created_at": "2026-11-16T10:09:00Z",
+      "updated_at": "2026-11-16T10:34:27Z"
+    }
+  ]
 }
