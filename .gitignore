@@ -1,0 +1,12 @@
+# Archivos locales del propietario (no se publican)
+content/
+.env
+.env.*
+*.local
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Dependencias
+node_modules/
