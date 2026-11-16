@@ -155,11 +155,13 @@
   }
 
   function cachedJSON(key, ttl, url) {
+    var stale = null;
     try {
       var raw = localStorage.getItem(key);
       if (raw) {
         var o = JSON.parse(raw);
         if (o && Date.now() - o.t < ttl) return Promise.resolve(o.v);
+        if (o) stale = o.v;
       }
     } catch (e) {}
     return fetch(url).then(function (r) {
@@ -168,6 +170,9 @@
     }).then(function (v) {
       try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), v: v })); } catch (e) {}
       return v;
+    }).catch(function (err) {
+      if (stale !== null) return stale;
+      throw err;
     });
   }
 
@@ -183,37 +188,31 @@
 
     var seen = {};
     var projects = [];
-    var commits = [];
+    var pushed = [];
 
     (events || []).forEach(function (ev) {
       if (!ev || !ev.repo) return;
-      var repo = ev.repo.name.split("/").pop();
+      var full = ev.repo.name;
+      var repo = full.split("/").pop();
       var p = ev.payload || {};
       var at = ev.created_at;
 
       if (ev.type === "PushEvent") {
-        if (!seen[repo]) {
-          seen[repo] = true;
-          projects.push({ name: repo, at: at, kind: "pushed", url: "https://github.com/" + ev.repo.name });
+        if (pushed.indexOf(full) === -1) pushed.push(full);
+        if (!seen[full]) {
+          seen[full] = true;
+          projects.push({ name: repo, fullName: full, at: at, kind: "pushed", url: "https://github.com/" + full });
         }
-        (p.commits || []).forEach(function (c) {
-          if (!c || !c.sha) return;
-          commits.push({
-            repo: repo,
-            message: (c.message || "").split("\n")[0],
-            at: at,
-            url: "https://github.com/" + ev.repo.name + "/commit/" + c.sha
-          });
-        });
       } else if (ev.type === "PullRequestEvent" && p.action === "closed" &&
                  p.pull_request && p.pull_request.merged) {
-        if (!seen[repo]) {
-          seen[repo] = true;
+        if (!seen[full]) {
+          seen[full] = true;
           projects.push({
             name: repo,
+            fullName: full,
             at: at,
             kind: "merged",
-            url: p.pull_request.html_url || ("https://github.com/" + ev.repo.name)
+            url: p.pull_request.html_url || ("https://github.com/" + full)
           });
         }
       }
@@ -221,22 +220,30 @@
 
     if (!projects.length) {
       projects = ((data && data.projects) || []).slice(0, 4).map(function (p) {
-        return { name: p.name, at: p.updatedAt, kind: "pushed", url: p.url };
+        return {
+          name: p.name,
+          fullName: USER.username + "/" + p.name,
+          at: p.updatedAt,
+          kind: "pushed",
+          url: p.url
+        };
       });
     }
 
     projects = projects.slice(0, 4).map(function (p) {
       var m = meta[p.name] || {};
+      var owner = (p.fullName || "").split("/")[0];
       p.description = m.description || "";
+      if (!p.description && owner && owner.toLowerCase() !== USER.username.toLowerCase()) {
+        p.description = fmtTpl("activity.orgRepo", { org: owner });
+      }
       p.language = m.language || null;
       p.at = p.at || m.updatedAt;
-      p.url = p.url || m.url || ("https://github.com/" + USER.username + "/" + p.name);
+      p.url = p.url || m.url || ("https://github.com/" + p.fullName);
       return p;
     });
 
-    commits.sort(function (a, b) { return new Date(b.at) - new Date(a.at); });
-
-    return { projects: projects, commits: commits.slice(0, 8) };
+    return { projects: projects, pushed: pushed.slice(0, 3) };
   }
 
   function renderActivityProjects() {
@@ -336,12 +343,48 @@
     }
   }
 
+  function loadCommits(repos) {
+    if (!repos || !repos.length) repos = [REPO];
+
+    var requests = repos.slice(0, 3).map(function (full) {
+      return cachedJSON("alain.commits." + full, 5 * 60 * 1000,
+        "https://api.github.com/repos/" + full + "/commits?per_page=3")
+        .then(function (list) {
+          return (list || []).map(function (c) {
+            var commit = c.commit || {};
+            var author = commit.author || {};
+            return {
+              repo: full.split("/").pop(),
+              message: (commit.message || "").split("\n")[0],
+              at: author.date || commit.committer && commit.committer.date || null,
+              url: c.html_url
+            };
+          });
+        })
+        .catch(function () { return []; });
+    });
+
+    Promise.all(requests).then(function (parts) {
+      var all = [];
+      var seen = {};
+      parts.forEach(function (list) {
+        list.forEach(function (c) {
+          if (!c.url || seen[c.url]) return;
+          seen[c.url] = true;
+          all.push(c);
+        });
+      });
+      all.sort(function (a, b) { return new Date(b.at) - new Date(a.at); });
+      activityState.commits = all.slice(0, 8);
+      renderActivityCommits();
+    });
+  }
+
   function renderActivity(events, data) {
     var a = collectActivity(events, data);
     activityState.projects = a.projects;
-    activityState.commits = a.commits;
     renderActivityProjects();
-    renderActivityCommits();
+    loadCommits(a.pushed);
   }
 
   function tumbleEmpty() {
