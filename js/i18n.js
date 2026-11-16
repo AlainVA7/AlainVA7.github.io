@@ -45,11 +45,11 @@ var I18N = {
     "proj.public": "público",
     "proj.fork": "fork",
     /* skills */
-    "skills.note": "Áreas orientativas — sigo aprendiendo.",
-    "skills.teleco": "Teleco / infraestructura",
-    "skills.it": "Informática",
-    "skills.telecoTag": "Teleco",
-    "skills.itTag": "Informática",
+    "skills.note": "Estado de consolidación — sigo aprendiendo.",
+    "skills.solid": "Consolidado",
+    "skills.learning": "En aprendizaje",
+    "skills.solidTag": "Consolidado",
+    "skills.learningTag": "En aprendizaje",
     /* hud */
     "activity.title": "Actividad",
     "activity.projects": "Proyectos recientes",
@@ -150,11 +150,11 @@ var I18N = {
     "proj.public": "public",
     "proj.fork": "fork",
     /* skills */
-    "skills.note": "Indicative areas — still learning.",
-    "skills.teleco": "Telecom / infrastructure",
-    "skills.it": "IT",
-    "skills.telecoTag": "Telecom",
-    "skills.itTag": "IT",
+    "skills.note": "Consolidation status — still learning.",
+    "skills.solid": "Consolidated",
+    "skills.learning": "Learning",
+    "skills.solidTag": "Consolidated",
+    "skills.learningTag": "Learning",
     /* hud */
     "activity.title": "Activity",
     "activity.projects": "Recent projects",

@@ -170,7 +170,7 @@ var Apps = (function () {
       row.className = "skill-row " + (s.tone === "blue" ? "tone-blue" : "tone-orange");
       row.innerHTML =
         '<span class="skill-name">' + esc(s.name[Lang.lang] || s.name.es) + "</span>" +
-        '<span class="skill-tag">' + esc(Lang.t(s.tone === "blue" ? "skills.telecoTag" : "skills.itTag")) + "</span>";
+        '<span class="skill-tag">' + esc(Lang.t(s.tone === "blue" ? "skills.solidTag" : "skills.learningTag")) + "</span>";
       box.appendChild(row);
     });
   }

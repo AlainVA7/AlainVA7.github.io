@@ -18,7 +18,7 @@ var USER = {
   site: "https://alainva7.github.io"
 };
 
-/* Áreas: blue = teleco/infraestructura, orange = informática */
+/* Estado: blue = consolidado, orange = en aprendizaje */
 var SKILLS = [
   { id: "networking", tone: "blue",   name: { es: "Redes & Telecomunicaciones", en: "Networks & Telecommunications" } },
   { id: "linux",      tone: "orange", name: { es: "Linux", en: "Linux" } },
