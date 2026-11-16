@@ -165,18 +165,14 @@ var Apps = (function () {
     var box = win.querySelector("#skillList");
     if (!box) return;
     box.innerHTML = "";
-    SKILLS.forEach(function (s, i) {
+    SKILLS.forEach(function (s) {
       var row = document.createElement("div");
-      row.className = "skill-row";
+      row.className = "skill-row " + (s.tone === "blue" ? "tone-blue" : "tone-orange");
       row.innerHTML =
-        '<div class="skill-head"><span class="skill-name">' + esc(s.name[Lang.lang] || s.name.es) + "</span>" +
-        '<span class="skill-lvl">' + s.level + "%</span></div>" +
-        '<div class="skill-track"><div class="skill-fill" style="--i:' + i + '" data-w="' + s.level + '"></div></div>';
+        '<span class="skill-name">' + esc(s.name[Lang.lang] || s.name.es) + "</span>" +
+        '<span class="skill-tag">' + esc(Lang.t(s.tone === "blue" ? "skills.telecoTag" : "skills.itTag")) + "</span>";
       box.appendChild(row);
     });
-    /* cascada: primero las filas, luego las barras (sin depender de rAF) */
-    void box.offsetWidth;
-    box.querySelectorAll(".skill-fill").forEach(function (f) { f.style.width = f.dataset.w + "%"; });
   }
 
   /* ─────────── CONTACTO ─────────── */
