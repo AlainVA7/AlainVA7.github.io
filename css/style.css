@@ -195,9 +195,9 @@ button { font-family: inherit; color: inherit; }
   position: absolute; top: calc(var(--topbar-h) + 34px); left: 50%;
   transform: translateX(-50%);
   z-index: 2;
-  width: min(980px, calc(100vw - 40px));
+  width: min(1080px, calc(100vw - 40px));
   display: grid;
-  grid-template-columns: 1.15fr .85fr;
+  grid-template-columns: minmax(300px, .82fr) minmax(0, 1.18fr);
   gap: 14px;
   align-items: stretch;
 }
@@ -271,25 +271,97 @@ button { font-family: inherit; color: inherit; }
 .hud-sub { font-size: 10.5px; color: var(--ink-3); text-decoration: none; white-space: nowrap; }
 
 /* ——— Actividad GitHub ——— */
-#ghActivity { max-height: 348px; }
-.gh-list {
+#activity { max-height: 430px; gap: 10px; animation-delay: .42s; }
+.activity-projects { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 8px; }
+.activity-label {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+}
+.activity-label h3 {
+  margin: 0;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--ink-2);
+}
+.activity-label > span { font-size: 10px; color: var(--ink-3); white-space: nowrap; }
+.activity-proj-list {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  min-height: 0; overflow-y: auto; padding-right: 2px;
+}
+.apcard {
+  min-width: 0;
+  display: flex; flex-direction: column; gap: 5px;
+  padding: 10px 11px;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 11px;
+  color: inherit; text-decoration: none;
+  transition: transform .25s var(--spring), border-color .25s, background .25s;
+}
+.apcard:hover, .apcard:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--line-strong);
+  background: var(--surface-2);
+}
+.apcard-top { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.apcard-name {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 12.5px; font-weight: 600; color: var(--ink);
+}
+.apcard-badge {
+  flex: 0 0 auto; margin-left: auto;
+  padding: 1px 6px; border-radius: 999px;
+  font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--accent); background: rgba(88, 166, 255, .12);
+  border: 1px solid rgba(88, 166, 255, .22);
+}
+.apcard-badge.merge { color: var(--ok); background: rgba(73, 193, 122, .12); border-color: rgba(73, 193, 122, .22); }
+.apcard-desc {
+  margin: 0; min-height: 2.8em;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  font-size: 11.5px; line-height: 1.4; color: var(--ink-3);
+}
+.apcard-foot {
+  margin-top: auto; display: flex; align-items: center; gap: 8px;
+  font-size: 10px; color: var(--ink-3);
+}
+.apcard-lang { display: inline-flex; align-items: center; gap: 5px; min-width: 0; }
+.apcard-time { margin-left: auto; white-space: nowrap; }
+.activity-commits {
+  flex: 0 0 auto;
+  display: flex; flex-direction: column; gap: 6px;
+  border-top: 1px solid var(--line); padding-top: 9px;
+}
+.commit-list {
   list-style: none; margin: 0; padding: 0;
-  display: flex; flex-direction: column; gap: 9px;
-  flex: 1; min-height: 0; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 5px;
+  max-height: 160px; overflow-y: auto;
 }
-.gh-item { display: flex; gap: 9px; align-items: flex-start; }
-.gh-ico {
-  width: 22px; height: 22px; flex: 0 0 auto;
-  display: grid; place-items: center;
-  border-radius: 6px;
-  background: var(--surface-2); border: 1px solid var(--line);
-  color: var(--accent);
+.commit-item { display: flex; gap: 8px; align-items: flex-start; }
+.commit-dot {
+  width: 7px; height: 7px; flex: 0 0 auto; margin-top: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, .14);
 }
-.gh-ico svg { width: 12px; height: 12px; }
-.gh-text { margin: 0; font-size: 12.5px; line-height: 1.4; color: var(--ink-2); }
-.gh-text b { color: var(--ink); font-weight: 600; }
-.gh-time { display: block; margin-top: 2px; font-size: 10.5px; color: var(--ink-3); }
-.gh-empty { font-size: 12px; color: var(--ink-3); padding: 2px 0; }
+.commit-body { min-width: 0; }
+.commit-msg {
+  margin: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 11.5px; line-height: 1.4; color: var(--ink-2);
+}
+.commit-meta { display: block; margin-top: 1px; font-size: 10px; color: var(--ink-3); }
+.commit-meta b { color: var(--ink-2); font-weight: 600; }
+.commits-toggle {
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-3);
+  font-size: 10px; font-weight: 600;
+  cursor: pointer;
+  transition: color .2s, border-color .2s, background .2s;
+}
+.commits-toggle:hover { color: var(--ink); border-color: var(--line-strong); background: var(--surface-2); }
+.commits-toggle[hidden] { display: none; }
+.hud-empty { margin: 0; font-size: 12px; color: var(--ink-3); padding: 2px 0; }
 
 /* ——— Chismografía Técnica ——— */
 #chisme { grid-column: 1 / -1; min-height: 178px; }
@@ -431,7 +503,9 @@ button { font-family: inherit; color: inherit; }
   }
   #welcome { padding: 22px 18px; }
   .welcome-role { font-size: 17px; }
-  #ghActivity { max-height: 230px; }
+  #activity { max-height: none; }
+  .activity-proj-list { grid-template-columns: 1fr; overflow: visible; }
+  .commit-list { max-height: 210px; }
   #chisme { min-height: 150px; }
   .chisme-empty { flex-direction: column; gap: 10px; }
   .desert { width: min(260px, 100%); }

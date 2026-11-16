@@ -67,14 +67,31 @@
         </div>
       </section>
 
-      <section id="ghActivity" class="hud-card" aria-labelledby="ghTitle">
+      <section id="activity" class="hud-card" aria-labelledby="activityTitle">
         <header class="hud-head">
-          <h2 class="hud-title" id="ghTitle" data-i18n="gh.title">Actividad reciente</h2>
+          <h2 class="hud-title" id="activityTitle" data-i18n="activity.title">Actividad</h2>
           <span class="hud-sub">GitHub</span>
         </header>
-        <ul class="gh-list" id="ghEvents">
-          <li class="gh-empty" data-i18n="gh.loading">Cargando actividad…</li>
-        </ul>
+
+        <div class="activity-projects">
+          <div class="activity-label">
+            <h3 data-i18n="activity.projects">Proyectos recientes</h3>
+            <span data-i18n="activity.projectsHint">Pusheados o mergeados</span>
+          </div>
+          <div class="activity-proj-list" id="recentProjects" aria-live="polite">
+            <p class="hud-empty" data-i18n="activity.loading">Cargando actividad…</p>
+          </div>
+        </div>
+
+        <div class="activity-commits">
+          <div class="activity-label">
+            <h3 data-i18n="activity.commits">Últimos commits</h3>
+            <button class="commits-toggle" id="commitsMore" type="button" data-i18n="activity.more" aria-expanded="false">Ver más</button>
+          </div>
+          <ul class="commit-list" id="recentCommits" aria-live="polite">
+            <li class="hud-empty" data-i18n="activity.loading">Cargando actividad…</li>
+          </ul>
+        </div>
       </section>
 
       <section id="chisme" class="hud-card" aria-labelledby="chismeTitle">
