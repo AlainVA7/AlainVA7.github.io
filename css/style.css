@@ -113,42 +113,234 @@ button { font-family: inherit; color: inherit; }
   content: ""; position: absolute; inset: 0; z-index: -1;
   opacity: 1; transition: opacity .6s ease;
 }
+#wallFx {
+  position: absolute; inset: 0; z-index: -1;
+  overflow: hidden; pointer-events: none;
+}
+#wallFx span, #wallFx::before, #wallFx::after {
+  content: ""; position: absolute; display: block;
+}
+#wallFx span { opacity: 0; border-radius: 50%; }
+
+/* ——— Aurora ——— */
+[data-wall="aurora"] #desktop::before {
+  background:
+    radial-gradient(1200px 900px at 50% -10%, #12243d 0%, transparent 62%),
+    linear-gradient(160deg, #060d18 0%, #0a1220 50%, #130f26 100%);
+}
 [data-wall="aurora"] #desktop::after {
   background:
-    radial-gradient(1100px 750px at 14% 18%, rgba(88, 166, 255, .17), transparent 60%),
-    radial-gradient(950px 700px at 86% 78%, rgba(155, 113, 247, .13), transparent 55%),
-    radial-gradient(700px 500px at 60% 8%, rgba(73, 193, 122, .07), transparent 60%);
+    linear-gradient(115deg, transparent 28%, rgba(88, 166, 255, .07) 42%, transparent 56%),
+    linear-gradient(295deg, transparent 34%, rgba(167, 139, 250, .06) 48%, transparent 62%);
+  animation: wpSweep 18s ease-in-out infinite alternate;
+}
+[data-wall="aurora"] #wallFx span:nth-child(1) {
+  inset: -18% auto auto -12%; width: 55vmax; height: 55vmax;
+  background: radial-gradient(circle, rgba(56, 189, 248, .32), transparent 66%);
+  opacity: .9; animation: wpDriftA 18s ease-in-out infinite;
+}
+[data-wall="aurora"] #wallFx span:nth-child(2) {
+  inset: auto -14% -22% auto; width: 52vmax; height: 52vmax;
+  background: radial-gradient(circle, rgba(167, 139, 250, .3), transparent 66%);
+  opacity: .85; animation: wpDriftB 24s ease-in-out infinite;
+}
+[data-wall="aurora"] #wallFx span:nth-child(3) {
+  inset: 32% auto auto 46%; width: 38vmax; height: 38vmax;
+  background: radial-gradient(circle, rgba(73, 193, 122, .2), transparent 68%);
+  opacity: .7; animation: wpDriftA 21s ease-in-out infinite reverse;
+}
+
+/* ——— Graphite ——— */
+[data-wall="graphite"] #desktop::before {
+  background: radial-gradient(1100px 800px at 72% 12%, #2a2f38 0%, #12151a 45%, #080a0e 100%);
 }
 [data-wall="graphite"] #desktop::after {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 8%, transparent 78%);
+  mask-image: radial-gradient(ellipse at 50% 45%, #000 8%, transparent 78%);
+}
+[data-wall="graphite"] #wallFx span:nth-child(1) {
+  inset: -35% auto auto -25%; width: 70vmax; height: 70vmax;
+  background: radial-gradient(circle, rgba(245, 176, 81, .17), transparent 62%);
+  opacity: .9; animation: wpDriftB 24s ease-in-out infinite;
+}
+[data-wall="graphite"] #wallFx::after {
+  inset: 0;
+  background: linear-gradient(120deg, transparent 44%, rgba(255, 255, 255, .055) 50%, transparent 56%);
+  animation: wpSweep 14s ease-in-out infinite alternate;
+}
+
+/* ——— Ocean ——— */
+[data-wall="ocean"] #desktop::before {
   background:
-    radial-gradient(1000px 700px at 80% 20%, rgba(255, 255, 255, .06), transparent 60%),
-    radial-gradient(800px 600px at 20% 85%, rgba(255, 255, 255, .045), transparent 55%),
-    linear-gradient(160deg, rgba(255, 255, 255, .02), transparent 40%);
+    radial-gradient(1200px 900px at 50% 112%, #0a4b52 0%, #062a3d 42%, #03131f 100%);
 }
 [data-wall="ocean"] #desktop::after {
-  background:
-    radial-gradient(1000px 750px at 75% 25%, rgba(45, 164, 219, .18), transparent 60%),
-    radial-gradient(850px 600px at 15% 80%, rgba(34, 120, 214, .15), transparent 55%),
-    radial-gradient(600px 450px at 45% 55%, rgba(80, 220, 190, .07), transparent 60%);
+  background: repeating-radial-gradient(ellipse at 50% 125%,
+    transparent 0 58px, rgba(94, 234, 212, .075) 60px 61px, transparent 63px 116px);
+  animation: wpWave 24s linear infinite;
 }
-[data-wall="plain"] #desktop::after { background: transparent; }
+[data-wall="ocean"] #wallFx span:nth-child(1) {
+  inset: -12% auto auto 62%; width: 46vmax; height: 46vmax;
+  background: radial-gradient(circle, rgba(34, 211, 238, .22), transparent 66%);
+  opacity: .9; animation: wpDriftA 20s ease-in-out infinite;
+}
+[data-wall="ocean"] #wallFx span:nth-child(2) {
+  inset: auto auto -18% -8%; width: 42vmax; height: 42vmax;
+  background: radial-gradient(circle, rgba(45, 212, 191, .18), transparent 68%);
+  opacity: .8; animation: wpDriftB 26s ease-in-out infinite;
+}
+[data-wall="ocean"] #wallFx::after {
+  inset: -20% 0;
+  background-image:
+    radial-gradient(circle, rgba(186, 230, 253, .45) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(153, 246, 228, .35) 0 1.5px, transparent 2.5px);
+  background-size: 140px 190px, 90px 150px;
+  background-position: 0 120%, 45px 90%;
+  opacity: .35;
+  animation: wpBubbles 18s linear infinite;
+}
 
-/* Ajuste de wallpapers para tema claro (más sutiles) */
-[data-theme="light"][data-wall="aurora"] #desktop::after {
-  background:
-    radial-gradient(1100px 750px at 14% 18%, rgba(11, 105, 214, .1), transparent 60%),
-    radial-gradient(950px 700px at 86% 78%, rgba(146, 96, 232, .09), transparent 55%),
-    radial-gradient(700px 500px at 60% 8%, rgba(26, 157, 85, .07), transparent 60%);
+/* ——— Sunset ——— */
+[data-wall="sunset"] #desktop::before {
+  background: linear-gradient(180deg, #1b0c2d 0%, #3a1240 38%, #7c1e45 68%, #160a1c 100%);
 }
-[data-theme="light"][data-wall="ocean"] #desktop::after {
+[data-wall="sunset"] #wallFx span:nth-child(1) {
+  left: 50%; top: 34%; width: 38vmin; height: 38vmin;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffe08a 0%, #ff8a4c 42%, rgba(255, 80, 120, .55) 66%, transparent 72%);
+  opacity: .95;
+  transform: translate(-50%, 0);
+  animation: wpSun 9s ease-in-out infinite;
+}
+[data-wall="sunset"] #wallFx span:nth-child(2) {
+  inset: auto auto -30% -20%; width: 70vmax; height: 45vmax;
+  background: radial-gradient(circle, rgba(255, 94, 158, .2), transparent 65%);
+  opacity: .9; animation: wpDriftB 22s ease-in-out infinite;
+}
+[data-wall="sunset"] #wallFx::after {
+  left: -25%; right: -25%; top: 58%; bottom: -10%;
+  background-image:
+    linear-gradient(rgba(255, 120, 180, .2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 120, 180, .2) 1px, transparent 1px);
+  background-size: 64px 38px;
+  transform: perspective(340px) rotateX(58deg);
+  transform-origin: 50% 0%;
+  -webkit-mask-image: linear-gradient(#000, transparent 82%);
+  mask-image: linear-gradient(#000, transparent 82%);
+  animation: wpGrid 6s linear infinite;
+}
+
+/* ——— Matrix ——— */
+[data-wall="matrix"] #desktop::before {
+  background: radial-gradient(1000px 700px at 50% 0%, #0a2418 0%, #04100a 55%, #010402 100%);
+}
+[data-wall="matrix"] #desktop::after {
   background:
-    radial-gradient(1000px 750px at 75% 25%, rgba(45, 164, 219, .14), transparent 60%),
-    radial-gradient(850px 600px at 15% 80%, rgba(34, 120, 214, .1), transparent 55%);
+    radial-gradient(circle at 18% 28%, rgba(57, 255, 136, .16), transparent 42%),
+    radial-gradient(circle at 82% 68%, rgba(0, 255, 190, .1), transparent 48%);
+}
+[data-wall="matrix"] #wallFx::before {
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(57, 255, 136, .075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 136, .075) 1px, transparent 1px);
+  background-size: 34px 34px;
+  -webkit-mask-image: radial-gradient(circle at 50% 45%, #000, transparent 78%);
+  mask-image: radial-gradient(circle at 50% 45%, #000, transparent 78%);
+}
+[data-wall="matrix"] #wallFx::after {
+  left: 0; right: 0; top: -25%; height: 25%;
+  background: linear-gradient(transparent, rgba(57, 255, 136, .14), transparent);
+  animation: wpScan 7s linear infinite;
+}
+
+/* ——— Plain ——— */
+[data-wall="plain"] #desktop::before {
+  background: radial-gradient(1200px 800px at 50% 0%, #151b25 0%, #0b0f16 55%, #070a10 100%);
+}
+[data-wall="plain"] #desktop::after {
+  background: radial-gradient(ellipse at 50% 112%, rgba(88, 166, 255, .07), transparent 55%);
+}
+
+/* ——— Tema claro ——— */
+[data-theme="light"] #wallFx { opacity: .55; }
+[data-theme="light"] #desktop::after { opacity: .65; }
+[data-theme="light"][data-wall="aurora"] #desktop::before {
+  background:
+    radial-gradient(1200px 900px at 50% -10%, #dbe9fb 0%, transparent 62%),
+    linear-gradient(160deg, #eef4fb 0%, #f7f9fc 50%, #f2ecfb 100%);
+}
+[data-theme="light"][data-wall="graphite"] #desktop::before {
+  background: radial-gradient(1100px 800px at 72% 12%, #e6e9ee 0%, #f4f6f9 48%, #eceff3 100%);
 }
 [data-theme="light"][data-wall="graphite"] #desktop::after {
-  background:
-    radial-gradient(1000px 700px at 80% 20%, rgba(15, 30, 55, .05), transparent 60%),
-    radial-gradient(800px 600px at 20% 85%, rgba(15, 30, 55, .04), transparent 55%);
+  background-image:
+    linear-gradient(rgba(15, 30, 55, .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 30, 55, .07) 1px, transparent 1px);
+}
+[data-theme="light"][data-wall="ocean"] #desktop::before {
+  background: radial-gradient(1200px 900px at 50% 112%, #c3e9ea 0%, #dceff7 42%, #eaf5fb 100%);
+}
+[data-theme="light"][data-wall="ocean"] #desktop::after {
+  background: repeating-radial-gradient(ellipse at 50% 125%,
+    transparent 0 58px, rgba(13, 148, 136, .1) 60px 61px, transparent 63px 116px);
+}
+[data-theme="light"][data-wall="sunset"] #desktop::before {
+  background: linear-gradient(180deg, #f3e6fb 0%, #fbdce9 42%, #ffe2cf 72%, #f7eef8 100%);
+}
+[data-theme="light"][data-wall="sunset"] #desktop::after {
+  background-image:
+    linear-gradient(rgba(219, 39, 119, .12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(219, 39, 119, .12) 1px, transparent 1px);
+}
+[data-theme="light"][data-wall="matrix"] #desktop::before {
+  background: radial-gradient(1000px 700px at 50% 0%, #d9f3e3 0%, #eef9f2 55%, #f7fcf9 100%);
+}
+[data-theme="light"][data-wall="matrix"] #wallFx::before {
+  background-image:
+    linear-gradient(rgba(16, 120, 70, .1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 120, 70, .1) 1px, transparent 1px);
+}
+[data-theme="light"][data-wall="plain"] #desktop::before {
+  background: radial-gradient(1200px 800px at 50% 0%, #e7edf6 0%, #f2f5f9 55%, #f7f9fc 100%);
+}
+
+/* ——— Animaciones de fondo ——— */
+@keyframes wpDriftA {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6%, -4%, 0) scale(1.15); }
+}
+@keyframes wpDriftB {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); }
+  50% { transform: translate3d(-5%, 5%, 0) scale(.9); }
+}
+@keyframes wpSweep {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+@keyframes wpWave {
+  from { background-position: 0 0; }
+  to { background-position: 0 -232px; }
+}
+@keyframes wpBubbles {
+  from { background-position: 0 120%, 45px 90%; }
+  to { background-position: 0 -40%, 45px -80%; }
+}
+@keyframes wpSun {
+  0%, 100% { transform: translate(-50%, 0) scale(1); }
+  50% { transform: translate(-50%, -2%) scale(1.04); }
+}
+@keyframes wpGrid {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 38px, 0 38px; }
+}
+@keyframes wpScan {
+  from { transform: translateY(0); }
+  to { transform: translateY(600%); }
 }
 
 /* ═══════════════ BARRA SUPERIOR ═══════════════ */

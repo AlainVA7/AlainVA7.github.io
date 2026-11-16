@@ -35,6 +35,7 @@
 
   <!-- ══════════════ ESCRITORIO ══════════════ -->
   <div id="desktop" aria-hidden="false">
+    <div id="wallFx" aria-hidden="true"><span></span><span></span><span></span></div>
 
     <!-- Barra superior -->
     <header id="topbar">
@@ -279,10 +280,12 @@
         <div class="set-row">
           <span data-i18n="set.wall">Fondo</span>
           <div class="walls" id="wallPick">
-            <button type="button" class="wall wall-aurora" data-val="aurora" aria-label="Aurora"></button>
-            <button type="button" class="wall wall-graphite" data-val="graphite" aria-label="Graphite"></button>
-            <button type="button" class="wall wall-ocean" data-val="ocean" aria-label="Ocean"></button>
-            <button type="button" class="wall wall-plain" data-val="plain" aria-label="Plain"></button>
+            <button type="button" class="wall wall-aurora" data-val="aurora" data-i18n-aria="wall.aurora" aria-label="Aurora"></button>
+            <button type="button" class="wall wall-graphite" data-val="graphite" data-i18n-aria="wall.graphite" aria-label="Grafito"></button>
+            <button type="button" class="wall wall-ocean" data-val="ocean" data-i18n-aria="wall.ocean" aria-label="Océano"></button>
+            <button type="button" class="wall wall-sunset" data-val="sunset" data-i18n-aria="wall.sunset" aria-label="Atardecer"></button>
+            <button type="button" class="wall wall-matrix" data-val="matrix" data-i18n-aria="wall.matrix" aria-label="Matrix"></button>
+            <button type="button" class="wall wall-plain" data-val="plain" data-i18n-aria="wall.plain" aria-label="Liso"></button>
           </div>
         </div>
       </section>
