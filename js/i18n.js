@@ -45,11 +45,11 @@ var I18N = {
     "proj.public": "público",
     "proj.fork": "fork",
     /* skills */
-    "skills.note": "Niveles orientativos - en progreso, sigo aprendiendo.",
-    "skills.chip1": "Linux",
-    "skills.chip2": "Docker",
-    "skills.chip3": "Proxmox",
-    "skills.chip4": "IA",
+    "skills.note": "Áreas orientativas — sigo aprendiendo.",
+    "skills.teleco": "Teleco / infraestructura",
+    "skills.it": "Informática",
+    "skills.telecoTag": "Teleco",
+    "skills.itTag": "Informática",
     /* hud */
     "activity.title": "Actividad",
     "activity.projects": "Proyectos recientes",
@@ -150,11 +150,11 @@ var I18N = {
     "proj.public": "public",
     "proj.fork": "fork",
     /* skills */
-    "skills.note": "Indicative levels - work in progress, still learning.",
-    "skills.chip1": "Linux",
-    "skills.chip2": "Docker",
-    "skills.chip3": "Proxmox",
-    "skills.chip4": "AI",
+    "skills.note": "Indicative areas — still learning.",
+    "skills.teleco": "Telecom / infrastructure",
+    "skills.it": "IT",
+    "skills.telecoTag": "Telecom",
+    "skills.itTag": "IT",
     /* hud */
     "activity.title": "Activity",
     "activity.projects": "Recent projects",

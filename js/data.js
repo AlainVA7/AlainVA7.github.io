@@ -18,15 +18,15 @@ var USER = {
   site: "https://alainva7.github.io"
 };
 
-/* Niveles: 0–100 (orientativos, edita cuando quieras) */
+/* Áreas: blue = teleco/infraestructura, orange = informática */
 var SKILLS = [
-  { id: "networking", level: 60, name: { es: "Redes & Telecomunicaciones", en: "Networks & Telecommunications" } },
-  { id: "linux",      level: 45, name: { es: "Linux", en: "Linux" } },
-  { id: "docker",     level: 50, name: { es: "Docker", en: "Docker" } },
-  { id: "proxmox",    level: 55, name: { es: "Proxmox / Virtualización", en: "Proxmox / Virtualization" } },
-  { id: "git",        level: 55, name: { es: "Git & GitHub", en: "Git & GitHub" } },
-  { id: "ai",         level: 40, name: { es: "Inteligencia Artificial", en: "Artificial Intelligence" } },
-  { id: "grafana",    level: 35, name: { es: "Grafana / Monitorización", en: "Grafana / Monitoring" } }
+  { id: "networking", tone: "blue",   name: { es: "Redes & Telecomunicaciones", en: "Networks & Telecommunications" } },
+  { id: "linux",      tone: "orange", name: { es: "Linux", en: "Linux" } },
+  { id: "docker",     tone: "orange", name: { es: "Docker", en: "Docker" } },
+  { id: "proxmox",    tone: "blue",   name: { es: "Proxmox / Virtualización", en: "Proxmox / Virtualization" } },
+  { id: "git",        tone: "orange", name: { es: "Git & GitHub", en: "Git & GitHub" } },
+  { id: "ai",         tone: "orange", name: { es: "Inteligencia Artificial", en: "Artificial Intelligence" } },
+  { id: "grafana",    tone: "blue",   name: { es: "Grafana / Monitorización", en: "Grafana / Monitoring" } }
 ];
 
 /* Colores por lenguaje (para las tarjetas de proyecto) */
